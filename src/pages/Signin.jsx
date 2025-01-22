@@ -1,8 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router";
+import supabase from "../supabase/auth";
+import Loader from "../components/Loader";
 
 const Signin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isloading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  async function login(e) {
+    e.preventDefault();
+    setLoading(true);
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      console.log(error);
+      setError(error);
+      setLoading(false);
+      return;
+    }
+
+    navigate("/dashboard");
+  }
   return (
     <>
+      {isloading && <Loader />}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -16,7 +45,7 @@ const Signin = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form action="#" method="POST" className="space-y-6">
+          <form onSubmit={login} className="space-y-6">
             <div>
               <label
                 htmlFor="email"
@@ -29,6 +58,8 @@ const Signin = () => {
                   id="email"
                   name="email"
                   type="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
                   required
                   autoComplete="email"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
@@ -58,12 +89,16 @@ const Signin = () => {
                   id="password"
                   name="password"
                   type="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
                   required
                   autoComplete="current-password"
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                 />
               </div>
             </div>
+
+            {error && <p className="text-rose font-bold">{error.message}</p>}
 
             <div>
               <button
@@ -77,12 +112,12 @@ const Signin = () => {
 
           <p className="mt-10 text-center text-sm/6 text-gray-500">
             Not a member?{" "}
-            <a
-              href="#"
+            <Link
+              to="/signup"
               className="font-semibold text-indigo-600 hover:text-indigo-500"
             >
               Create an account
-            </a>
+            </Link>
           </p>
         </div>
       </div>
