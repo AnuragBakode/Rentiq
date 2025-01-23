@@ -5,14 +5,15 @@ import Wrapper from './components/Wrapper'
 import Signin from './pages/Signin'
 import Signup from './pages/Signup'
 import Dashboard from "./pages/Dashboard";
+import AuthWrapper from "./components/AuthWrapper";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<AuthWrapper children={<Signin />} />} />
+        <Route path="/signup" element={<AuthWrapper children={<Signup />} />} />
         <Route
           path="/dashboard"
           element={<Wrapper children={<Dashboard />} />}

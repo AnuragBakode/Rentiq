@@ -1,34 +1,34 @@
 import React, { useEffect, useState } from "react";
 import supabase from "../supabase/auth";
-import { Navigate } from "react-router";
 import Loader from "./Loader";
+import { Navigate } from "react-router";
 
-function Wrapper({ children }) {
+const AuthWrapper = ({ children }) => {
   const [isLoggedIn, setLoggedIn] = useState(false);
-  const [isLoading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function func() {
+    async function getSession() {
       const {
         data: { session },
       } = await supabase.auth.getSession();
 
-      setLoggedIn(!!session);
       setLoading(false);
+      setLoggedIn(!!session);
     }
 
-    func();
+    getSession();
   }, []);
 
-  if (isLoading) {
+  if (loading) {
     return <Loader />;
   } else {
     if (isLoggedIn) {
-      return children;
+      return <Navigate to="/dashboard" />;
     } else {
-      return <Navigate to="/login" />;
+      return children;
     }
   }
-}
+};
 
-export default Wrapper;
+export default AuthWrapper;

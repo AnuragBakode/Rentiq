@@ -5,12 +5,16 @@ export default {
     colors: {
       rose: "#f1544e",
       black: "#2a2a2a",
-      white : "#ffffff"
+      white: "#ffffff",
     },
     extend: {
       animation: {
         bounce200: "bounce 1s infinite 200ms",
         bounce400: "bounce 1s infinite 400ms",
+      },
+      fontFamily: {
+        RedRose: ["Red Rose", "serif"],
+        Poppins: ["Poppins" , "serif"]
       },
     },
   },

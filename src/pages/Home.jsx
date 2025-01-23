@@ -1,9 +1,13 @@
 import React from 'react'
+import Logout from "../components/Logout";
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
+    <>
+      <h1>Default home Page</h1>
+      <Logout />
+    </>
+  );
+};
 
 export default Home
