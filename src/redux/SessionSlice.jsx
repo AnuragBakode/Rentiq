@@ -8,12 +8,15 @@ const initialState = {
   error: null,
 };
 
-export const fetchSession = createAsyncThunk("user/fetchUser ", async () => {
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  return session;
-});
+export const fetchSession = createAsyncThunk(
+  "session/fetchSession ",
+  async () => {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    return session;
+  }
+);
 
 const SessionSlice = createSlice({
   name: "session",

@@ -14,10 +14,10 @@ export default {
       },
       fontFamily: {
         RedRose: ["Red Rose", "serif"],
-        Poppins: ["Poppins" , "serif"]
+        Poppins: ["Poppins", "serif"],
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
 };
 
