@@ -6,12 +6,12 @@ import Loader from "./Loader";
 const PostItem = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    category: "",
-    picture: "",
-    price: "",
-    location: "",
+    name: null,
+    description: null,
+    category: null,
+    picture: null,
+    price: null,
+    location: null,
   });
 
   const [isLoading, setLoading] = useState(false);
@@ -35,7 +35,7 @@ const PostItem = () => {
 
     for (let key of Object.keys(formData)) {
       setFormData((prevData) => {
-        return { ...prevData, [key]: "" };
+        return { ...prevData, [key]: null };
       });
     }
   };
