@@ -87,13 +87,21 @@ const PostItem = () => {
     clearData();
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [isOpen]);
+
   return (
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="px-4 py-2 bg-blue-500 rounded hover:bg-blue-600 text-rose"
+        className="text-white font-semibold px-4 py-2 rounded-lg bg-green"
       >
-        Open Form
+        Post an Item
       </button>
 
       {isLoading && <Loader />}
@@ -102,13 +110,13 @@ const PostItem = () => {
         <div className="fixed inset-0 flex items-center justify-center z-40">
           <div
             className="fixed inset-0 bg-black bg-opacity-50"
-            onClick={() => setIsOpen(false)}
+            onClick={() => setIsOpen(false)}    
           ></div>
 
           <div className="relative bg-white rounded-md shadow-xl p-6 w-full max-w-5xl h-[70vh] overflow-y-auto scrollbar-hide">
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 font-bold text-xl"
+              className="absolute top-4 right-4 text-black font-bold text-xl"
               aria-label="Close"
             >
               ×
@@ -124,7 +132,7 @@ const PostItem = () => {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-black"
                 >
                   Name
                 </label>
@@ -134,13 +142,13 @@ const PostItem = () => {
                   type="text"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="mt-1 block w-1/2 border-b border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500"
+                  className="mt-1 block w-1/2 border-b text-black border-black focus:outline-none focus:ring-0 focus:border-blue-500"
                 />
               </div>
               <div>
                 <label
                   htmlFor="description"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-black"
                 >
                   Descripition
                 </label>
@@ -150,13 +158,13 @@ const PostItem = () => {
                   type="description"
                   value={formData.description}
                   onChange={handleInputChange}
-                  className="mt-1 block w-1/2 border-b border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500"
+                  className="mt-1 block w-1/2 text-black border-b border-black focus:outline-none focus:ring-0 focus:border-blue-500"
                 />
               </div>
               <div>
                 <label
                   htmlFor="category"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-black"
                 >
                   Category
                 </label>
@@ -165,7 +173,7 @@ const PostItem = () => {
                   name="category"
                   value={formData.category}
                   onChange={handleInputChange}
-                  className="mt-4 block w-1/2 border-b border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500"
+                  className="mt-4 block w-1/2 text-black border-b border-black focus:outline-none focus:ring-0 focus:border-blue-500"
                 >
                   <option>Select a category</option>
                   {category.map((cat) => {
@@ -180,7 +188,7 @@ const PostItem = () => {
               <div>
                 <label
                   htmlFor="picture"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-black"
                 >
                   Picture
                 </label>
@@ -191,13 +199,13 @@ const PostItem = () => {
                   onChange={(e) =>
                     setFormData({ ...formData, picture: e.target.files[0] })
                   }
-                  className="mt-4 block w-1/2 border-b border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500"
+                  className="mt-4 block w-1/2 border-b text-black border-black focus:outline-none focus:ring-0 focus:border-blue-500"
                 />
               </div>
               <div>
                 <label
                   htmlFor="price"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-black"
                 >
                   Price
                 </label>
@@ -207,13 +215,13 @@ const PostItem = () => {
                   type="number"
                   value={formData.price}
                   onChange={handleInputChange}
-                  className="mt-1 block w-1/2 border-b border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500"
+                  className="mt-1 block w-1/2 border-b text-black border-black focus:outline-none focus:ring-0 focus:border-blue-500"
                 />
               </div>
               <div>
                 <label
                   htmlFor="location"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-black"
                 >
                   Location
                 </label>
@@ -223,7 +231,7 @@ const PostItem = () => {
                   type="text"
                   value={formData.location}
                   onChange={handleInputChange}
-                  className="mt-1 block w-1/2 border-b border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-500"
+                  className="mt-1 block w-1/2 border-b text-black border-black focus:outline-none focus:ring-0 focus:border-blue-500"
                 />
               </div>
               <button

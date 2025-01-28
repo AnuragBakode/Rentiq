@@ -2,7 +2,7 @@ import React from "react";
 
 const Loader = () => {
   return (
-    <div className="w-screen h-screen fixed top-0 left-0 bg-white bg-opacity-80 z-50">
+    <div className="w-screen h-screen fixed top-0 left-0 bg-white bg-opacity-80 z-50 text-black">
       <div className="flex justify-center items-center mt-80">
         <span className="text-3xl mr-4">Loading</span>
         <svg

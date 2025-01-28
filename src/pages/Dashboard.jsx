@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
-import Logout from "../components/Logout";
-import PostItem from "../components/PostItem";
 import { useDispatch } from "react-redux";
 import { fetchProductCategory } from "../redux/ProductCategorySlice";
+import NavBar from "../components/NavBar";
+import Header from "../components/Header";
+import Carousel from "../components/Carousel";
+import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -11,12 +13,14 @@ const Dashboard = () => {
     dispatch(fetchProductCategory());
   }, [dispatch]);
 
+  const productCategory = useSelector((state) => state.productCategory);
+
   return (
-    <>
-      <h1>Welcome to dashboard</h1>
-      <Logout />
-      <PostItem />
-    </>
+    <div className="min-h-screen flex flex-col">
+      <NavBar />
+      <Header />
+      <Carousel title="Featured Categories" items={productCategory} />
+    </div>
   );
 };
 

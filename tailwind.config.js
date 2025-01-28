@@ -4,8 +4,12 @@ export default {
   theme: {
     colors: {
       rose: "#f1544e",
+      green: "#45827d",
+      roselight: "#f9afac",
       black: "#2a2a2a",
       white: "#ffffff",
+      Ivory: "#FFFFF0",
+      grey: "#e5e5e5",
     },
     extend: {
       animation: {
@@ -15,6 +19,7 @@ export default {
       fontFamily: {
         RedRose: ["Red Rose", "serif"],
         Poppins: ["Poppins", "serif"],
+        StyleScript: ["Style Script", "serif"],
       },
     },
   },
