@@ -4,7 +4,7 @@ import supabase from "../supabase/auth";
 
 const initialState = {
   session: null,
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 

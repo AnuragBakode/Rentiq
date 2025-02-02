@@ -63,12 +63,7 @@ const PostItem = () => {
 
     const { data: publicUrl } = supabase.storage
       .from("Product Images")
-      .getPublicUrl(fileName, {
-        transform: {
-          height: 200,
-          width: 200,
-        },
-      });
+      .getPublicUrl(fileName);
 
     const { error } = await supabase.from("Products").insert({
       ...formData,

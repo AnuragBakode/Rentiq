@@ -8,7 +8,7 @@ const NavBar = () => {
   };
   return (
     <>
-      <nav className="text-white p-4 flex justify-between items-center">
+      <nav className="text-white flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <img
             alt="Rentiq"

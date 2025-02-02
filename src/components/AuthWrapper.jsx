@@ -1,29 +1,21 @@
 import React, { useEffect, useState } from "react";
-import supabase from "../supabase/auth";
 import Loader from "./Loader";
 import { Navigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSession } from "../redux/SessionSlice";
 
 const AuthWrapper = ({ children }) => {
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const { session, isLoading } = useSelector((state) => state.session);
 
   useEffect(() => {
-    async function getSession() {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
+    dispatch(fetchSession());
+  }, [dispatch]);
 
-      setLoading(false);
-      setLoggedIn(!!session);
-    }
-
-    getSession();
-  }, []);
-
-  if (loading) {
+  if (isLoading) {
     return <Loader />;
   } else {
-    if (isLoggedIn) {
+    if (session) {
       return <Navigate to="/dashboard" />;
     } else {
       return children;

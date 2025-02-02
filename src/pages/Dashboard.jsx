@@ -7,16 +7,11 @@ import Carousel from "../components/Carousel";
 import { useSelector } from "react-redux";
 
 const Dashboard = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchProductCategory());
-  }, [dispatch]);
 
   const productCategory = useSelector((state) => state.productCategory);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col m-auto max-w-7xl">
       <NavBar />
       <Header />
       <Carousel title="Featured Categories" items={productCategory} />

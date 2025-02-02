@@ -6,6 +6,8 @@ import Signin from './pages/Signin'
 import Signup from './pages/Signup'
 import Dashboard from "./pages/Dashboard";
 import AuthWrapper from "./components/AuthWrapper";
+import Products from "./pages/Products";
+import Profile from "./components/Profile";
 
 function App() {
   return (
@@ -14,10 +16,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<AuthWrapper children={<Signin />} />} />
         <Route path="/signup" element={<AuthWrapper children={<Signup />} />} />
+        <Route path="/products" element={<Wrapper children={<Products />} />} />
         <Route
           path="/dashboard"
           element={<Wrapper children={<Dashboard />} />}
         />
+        <Route path="/profile" element={<Wrapper children={<Profile />} />} />
       </Routes>
     </BrowserRouter>
   );
