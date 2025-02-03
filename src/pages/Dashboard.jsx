@@ -11,7 +11,7 @@ const Dashboard = () => {
   const productCategory = useSelector((state) => state.productCategory);
 
   return (
-    <div className="min-h-screen flex flex-col m-auto max-w-7xl">
+    <div className="min-h-screen flex flex-col m-auto max-w-7xl mt-5">
       <NavBar />
       <Header />
       <Carousel title="Featured Categories" items={productCategory} />

@@ -2,8 +2,13 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ChevronRight } from "lucide-react";
 import "swiper/css";
+import { useNavigate } from "react-router";
 
 const Carousel = ({ title, items }) => {
+  const navigate = useNavigate();
+  const handleCardClick = () => {
+    
+  };
   return (
     <section className="mb-8 pl-10 pr-10">
       <h2 className="text-3xl font-bold text-orange mb-6">{title}</h2>
@@ -18,7 +23,7 @@ const Carousel = ({ title, items }) => {
         }}
       >
         {items.map((item, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} onClick={handleCardClick}>
             <div
               className="relative shadow-lg w-full rounded-xl h-72 bg-cover bg-center flex flex-col justify-between overflow-hidden"
               style={{

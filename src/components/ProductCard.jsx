@@ -1,5 +1,5 @@
 import React from "react";
-import { MapPin, Circle } from "lucide-react";
+import { MapPin, CircleUser } from "lucide-react";
 
 const ProductCard = ({ product }) => {
   const { picture } = product;
@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
           />
         </div>
         <div className="flex flex-row-reverse items-center justify-between mx-2 my-1">
-          <Circle size={40} strokeWidth={1.25} />
+          <CircleUser />
           <button
             className="text-sm bg-rose text-white py-1 px-2 rounded-md font-semibold"
             type="button"

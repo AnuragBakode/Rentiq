@@ -3,7 +3,7 @@ import supabase from "../supabase/auth";
 import { useSelector } from "react-redux";
 
 const initialState = {
-  pageSize: 1,
+  pageSize: 2,
   products: [],
   isLoading: true,
   error: "",
@@ -16,7 +16,7 @@ export const fetchProductsCount = createAsyncThunk(
     let query = supabase.from("Products").select();
 
     Object.entries(filters).forEach(([key, value]) => {
-      query = query.eq(key, value);
+      if (value) query = query.eq(key, value);
     });
 
     const { data } = await query;

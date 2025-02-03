@@ -21,7 +21,7 @@ function App() {
           path="/dashboard"
           element={<Wrapper children={<Dashboard />} />}
         />
-        <Route path="/profile" element={<Wrapper children={<Profile />} />} />
+        <Route path="/user" element={<Wrapper children={<Profile />} />} />
       </Routes>
     </BrowserRouter>
   );
