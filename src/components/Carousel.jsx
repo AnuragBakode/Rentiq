@@ -6,8 +6,8 @@ import { useNavigate } from "react-router";
 
 const Carousel = ({ title, items }) => {
   const navigate = useNavigate();
-  const handleCardClick = () => {
-    
+  const handleCardClick = (category) => {
+    navigate(`/products?category=${category}`);
   };
   return (
     <section className="mb-8 pl-10 pr-10">
@@ -23,7 +23,11 @@ const Carousel = ({ title, items }) => {
         }}
       >
         {items.map((item, index) => (
-          <SwiperSlide key={index} onClick={handleCardClick}>
+          <SwiperSlide
+            key={index}
+            onClick={() => handleCardClick(item.type)}
+            className="cursor-pointer"
+          >
             <div
               className="relative shadow-lg w-full rounded-xl h-72 bg-cover bg-center flex flex-col justify-between overflow-hidden"
               style={{

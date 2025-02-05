@@ -1,8 +1,21 @@
 import React from "react";
 import { MapPin, CircleUser } from "lucide-react";
+import { openModal } from "../redux/ProductModalSlice";
+import { useDispatch, useSelector } from "react-redux";
+import Modal from "./ProductModal";
+import ProductInfo from "./ProductInfo";
+import ProductModal from "./ProductModal";
 
 const ProductCard = ({ product }) => {
   const { picture } = product;
+
+  const dispatch = useDispatch();
+
+  const { isOpen } = useSelector((state) => state.productModal);
+
+  const handleRentNowBtn = () => {
+    dispatch(openModal(product));
+  };
 
   return (
     <div>
@@ -17,6 +30,7 @@ const ProductCard = ({ product }) => {
         <div className="flex flex-row-reverse items-center justify-between mx-2 my-1">
           <CircleUser />
           <button
+            onClick={handleRentNowBtn}
             className="text-sm bg-rose text-white py-1 px-2 rounded-md font-semibold"
             type="button"
           >

@@ -74,6 +74,8 @@ const PostItem = () => {
     // IF we  get an error while saving the data to the  data base we might not want to save the data in the supabase storage as well
     if (error) {
       supabase.storage.from("Product Images").remove([fileName]);
+      console.log(error);
+
       setError("Please enter all the details");
       setLoading(false);
       return;
@@ -105,7 +107,7 @@ const PostItem = () => {
         <div className="fixed inset-0 flex items-center justify-center z-40">
           <div
             className="fixed inset-0 bg-black bg-opacity-50"
-            onClick={() => setIsOpen(false)}    
+            onClick={() => setIsOpen(false)}
           ></div>
 
           <div className="relative bg-white rounded-md shadow-xl p-6 w-full max-w-5xl h-[70vh] overflow-y-auto scrollbar-hide">
@@ -173,7 +175,7 @@ const PostItem = () => {
                   <option>Select a category</option>
                   {category.map((cat) => {
                     return (
-                      <option key={cat.id} value={cat.id}>
+                      <option key={cat.id} value={cat.type}>
                         {cat.type}
                       </option>
                     );
