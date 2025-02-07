@@ -3,6 +3,7 @@ import SessionReducer from "./SessionSlice.jsx";
 import ProductCategory from "./ProductCategorySlice.jsx";
 import ProductReducer from "./ProductsSlice.jsx";
 import ProductModalReducer from "./ProductModalSlice.jsx";
+import CartReducer from "./CartSlice.jsx";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     productCategory: ProductCategory,
     products: ProductReducer,
     productModal: ProductModalReducer,
+    cart: CartReducer,
   },
 });
 

@@ -1,7 +1,7 @@
 import React, { Children, useState, useEffect } from "react";
 import { closeModal } from "../redux/ProductModalSlice";
 import { useDispatch, useSelector } from "react-redux";
-import ProductInfo from "./ProductInfo";
+import { resetMessage } from "../redux/CartSlice";
 
 const ProductModal = ({ children }) => {
   const dispatch = useDispatch();
@@ -16,17 +16,29 @@ const ProductModal = ({ children }) => {
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    console.log("Product Modal Mounted");
+  });
+
+  const handlex = () => {
+    dispatch(closeModal());
+    dispatch(resetMessage());
+  };
+
   return (
     <>
       <div className="fixed inset-0 flex items-center justify-center z-40">
         <div
           className="fixed inset-0 bg-black bg-opacity-50"
-          onClick={() => dispatch(closeModal())}
+          onClick={() => {
+            dispatch(closeModal());
+            dispatch(resetMessage());
+          }}
         ></div>
 
         <div className="relative bg-white rounded-md shadow-xl p-6 w-full max-w-5xl h-[70vh]">
           <button
-            onClick={() => dispatch(closeModal())}
+            onClick={handlex}
             className="absolute top-4 right-4 text-black font-bold text-xl"
             aria-label="Close"
           >

@@ -10,6 +10,10 @@ const Dashboard = () => {
 
   const productCategory = useSelector((state) => state.productCategory);
 
+  useEffect(() => {
+    console.log("Dashboard Mounted");
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col m-auto max-w-7xl mt-5">
       <NavBar />

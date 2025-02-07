@@ -1,11 +1,20 @@
 import React from "react";
-import { User } from "lucide-react";
+import { User, ShoppingCart } from "lucide-react";
 import PostItem from "./PostItem";
+import { useDispatch, useSelector } from "react-redux";
+import { openCart } from "../redux/CartSlice";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
   const handleProfileClick = (e) => {
     console.log(e);
   };
+  const handleCartBtnClick = () => {
+    dispatch(openCart());
+  };
+
+  const { productCount } = useSelector((state) => state.cart);
+
   return (
     <>
       <nav className="text-white flex justify-between items-center">
@@ -17,9 +26,6 @@ const NavBar = () => {
           />
         </div>
         <div className="flex items-center space-x-4">
-          {/* <button className=" text-white font-semibold px-4 py-2 rounded-lg bg-green">
-            Post an Item
-          </button> */}
           <PostItem />
           <button
             className="flex items-center border px-4 py-2 rounded-lg text-green hover:bg-blue/90"
@@ -28,6 +34,14 @@ const NavBar = () => {
             <User className="w-5 h-5 mr-2" />
             Profile
           </button>
+          <div className="relative cursor-pointer" onClick={handleCartBtnClick}>
+            {productCount > 0 && (
+              <p className="absolute -top-2 -right-2 bg-rose w-5 h-5 rounded-full text-sm text-white flex justify-center">
+                {productCount}
+              </p>
+            )}
+            <ShoppingCart className="text-green cursor-pointer" />
+          </div>
         </div>
       </nav>
     </>

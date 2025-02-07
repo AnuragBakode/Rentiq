@@ -22,6 +22,10 @@ const Products = () => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    console.log("Products Mounted");
+  }, []);
+
   const filters = useMemo(() => {
     const newFilters = {};
     for (let key of urlSearchParam.keys()) {

@@ -1,16 +1,35 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { MapPin } from "lucide-react";
+import { addToCart, openCart } from "../redux/CartSlice";
 
 const ProductInfo = () => {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
 
   const { product } = useSelector((state) => state.productModal);
+  const { message } = useSelector((state) => state.cart);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log("Product Info Moounted");
+  }, []);
 
   const handleAddToCart = () => {
-    console.log(startDate);
-    console.log(endDate);
+    dispatch(
+      addToCart({
+        product,
+        startDate,
+        endDate,
+      })
+    );
+    setStartDate("");
+    setEndDate("");
+  };
+
+  const handleGoToCart = () => {
+    dispatch(openCart());
   };
 
   return (
@@ -44,7 +63,7 @@ const ProductInfo = () => {
             <input
               type="date"
               id="start-date"
-              class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="cursor-pointer border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               onChange={(e) => setStartDate(e.target.value)}
               value={startDate}
             />
@@ -56,18 +75,27 @@ const ProductInfo = () => {
             <input
               type="date"
               id="end-date"
-              class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="cursor-pointer border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               onChange={(e) => setEndDate(e.target.value)}
               value={endDate}
             />
           </div>
         </div>
-        <button
-          className="px-4 bg-rose py-2 rounded-md text-white font-semibold mt-7"
-          onClick={handleAddToCart}
-        >
-          Add to Cart
-        </button>
+        {message && <p className="mt-5 text-rose text-sm">{message}</p>}
+        <div>
+          <button
+            className="px-4 bg-rose py-2 rounded-md text-white font-semibold mr-5"
+            onClick={handleAddToCart}
+          >
+            Add to Cart
+          </button>
+          <button
+            className="px-4 bg-rose py-2 rounded-md text-white font-semibold mt-7"
+            onClick={handleGoToCart}
+          >
+            Go to Cart
+          </button>
+        </div>
       </div>
     </div>
   );

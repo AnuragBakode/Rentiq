@@ -12,6 +12,10 @@ const AuthWrapper = ({ children }) => {
     dispatch(fetchSession());
   }, [dispatch]);
 
+  useEffect(() => {
+    console.log("Auth mounted");
+  }, []);
+
   if (isLoading) {
     return <Loader />;
   } else {
