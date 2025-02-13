@@ -7,7 +7,7 @@ import Signup from './pages/Signup'
 import Dashboard from "./pages/Dashboard";
 import AuthWrapper from "./components/AuthWrapper";
 import Products from "./pages/Products";
-import Profile from "./components/Profile";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
           path="/dashboard"
           element={<Wrapper children={<Dashboard />} />}
         />
-        <Route path="/user" element={<Wrapper children={<Profile />} />} />
+        <Route path="/profile" element={<Wrapper children={<Profile />} />} />
         {/* <Route path="/products" element={<Products />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/user" element={<Profile />} /> */}

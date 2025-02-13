@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MapPin } from "lucide-react";
-import { addToCart, openCart } from "../redux/CartSlice";
+import { addToCart, openCart, resetMessage } from "../redux/CartSlice";
 
 const ProductInfo = () => {
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   const { product } = useSelector((state) => state.productModal);
   const { message } = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log("Product Info Moounted");
-  }, []);
 
   const handleAddToCart = () => {
     dispatch(
@@ -26,6 +22,10 @@ const ProductInfo = () => {
     );
     setStartDate("");
     setEndDate("");
+
+    setTimeout(() => {
+      dispatch(resetMessage());
+    }, 3000);
   };
 
   const handleGoToCart = () => {
