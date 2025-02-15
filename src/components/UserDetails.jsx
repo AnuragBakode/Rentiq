@@ -1,27 +1,32 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { UserRound, Mail } from "lucide-react";
 
 export default function UserDetails() {
-  // In a real application, you'd fetch this data from your backend
-  const user = {
-    name: "John Doe",
-    email: "john@example.com",
-    avatar: "/placeholder.svg?height=100&width=100",
-  };
+  useEffect(() => {
+    console.log("UserDetails Remounted");
+  }, []);
+
+  const { session } = useSelector((state) => state.session);
+  const user = session.user;
+  const metaData = user.user_metadata;
 
   return (
-    <Card className="mb-8">
-      <CardHeader>
-        <CardTitle>User Details</CardTitle>
-      </CardHeader>
-      <CardContent className="flex flex-col items-center">
-        <Avatar className="w-24 h-24 mb-4">
-          <AvatarImage src={user.avatar} alt={user.name} />
-          <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-        </Avatar>
-        <h2 className="text-2xl font-semibold">{user.name}</h2>
-        <p className="text-muted-foreground">{user.email}</p>
-      </CardContent>
-    </Card>
+    <>
+      <div className="flex flex-col">
+        <div className="flex justify-between items-end">
+          <div className="border rounded-full m-1 p-4">
+            <UserRound size={48} />
+          </div>
+        </div>
+        <div className="mt-5">
+          <h2 className="text-xl font-semibold">{metaData.name}</h2>
+          <p className="text-gray-600 flex items-center">
+            <Mail size={16} strokeWidth={3} className="mr-2 mt-1 text-green" />
+            {metaData.email}
+          </p>
+        </div>
+      </div>
+    </>
   );
 }

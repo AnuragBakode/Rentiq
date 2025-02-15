@@ -53,17 +53,17 @@ const PostItem = () => {
       return;
     }
 
-    const fileName = Date.now().toString() + session.user.id;
+      const fileName = Date.now().toString() + session.user.id;
 
-    const { data } = await supabase.storage
-      .from("Product Images")
-      .upload(fileName, picture, { cacheControl: "3600", upsert: false });
+      const { data } = await supabase.storage
+        .from("Product Images")
+        .upload(fileName, picture, { cacheControl: "3600", upsert: false });
 
-    // Get the public URL of the  image and then save that URL in the database with the product details
+      // Get the public URL of the  image and then save that URL in the database with the product details
 
-    const { data: publicUrl } = supabase.storage
-      .from("Product Images")
-      .getPublicUrl(fileName);
+      const { data: publicUrl } = supabase.storage
+        .from("Product Images")
+        .getPublicUrl(fileName);
 
     const { error } = await supabase.from("Products").insert({
       ...formData,

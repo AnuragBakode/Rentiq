@@ -4,6 +4,7 @@ import ProductCategory from "./ProductCategorySlice.jsx";
 import ProductReducer from "./ProductsSlice.jsx";
 import ProductModalReducer from "./ProductModalSlice.jsx";
 import CartReducer from "./CartSlice.jsx";
+import UserProductReducer from "./UserProductsSlice.jsx";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     products: ProductReducer,
     productModal: ProductModalReducer,
     cart: CartReducer,
+    userProducts: UserProductReducer,
   },
 });
 
