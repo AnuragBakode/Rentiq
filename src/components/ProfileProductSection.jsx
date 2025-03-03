@@ -75,21 +75,27 @@ const ProfileProductSection = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <h2 className="text-xl font-semibold mb-4">Your Products</h2>
+      <h2 className="text-xl font-semibold mb-4 mt-6">Your Products</h2>
       <div className="flex items-start">
         <div className="flex flex-col w-3/5 pr-5">
           <div className="w-full flex flex-wrap">
-            {products.map((product) => {
-              return (
-                <div
-                  className="w-1/3 p-2"
-                  key={product.id}
-                  onClick={() => handleProductClick(product)}
-                >
-                  <Card item={product} />
-                </div>
-              );
-            })}
+            {products.length > 0 ? (
+              products.map((product) => {
+                return (
+                  <div
+                    className="w-1/3 p-2"
+                    key={product.id}
+                    onClick={() => handleProductClick(product)}
+                  >
+                    <Card item={product} page="Products" />
+                  </div>
+                );
+              })
+            ) : (
+              <p className="text-center w-full text-gray-500 mt-4">
+                You haven't posted any products yet
+              </p>
+            )}
           </div>
         </div>
 
@@ -97,118 +103,155 @@ const ProfileProductSection = () => {
           <div className="w-2/5 pl-5 mb-10">
             {updateProductModal ? (
               <>
-                <div>
-                  <h2 className="text-xl font-semibold mb-4">Edit Product</h2>
+                <div className="bg-white">
+                  <h2 className="text-xl font-bold text-gray-800 mb-4">
+                    Edit Product
+                  </h2>
 
-                  <label className="block text-sm font-medium">Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={selectedProduct.name}
-                    onChange={handleOnChangeUpdateInputField}
-                    className="w-full p-2 border rounded mt-1"
-                  />
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Name
+                      </label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={selectedProduct.name}
+                        onChange={handleOnChangeUpdateInputField}
+                        className="w-full px-3 py-1.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-rose/20 focus:border-rose transition-colors"
+                      />
+                    </div>
 
-                  <label className="block text-sm font-medium mt-3">
-                    Description
-                  </label>
-                  <textarea
-                    name="description"
-                    value={selectedProduct.description}
-                    onChange={handleOnChangeUpdateInputField}
-                    className="w-full p-2 border rounded mt-1"
-                  />
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Price (₹)
+                      </label>
+                      <input
+                        type="number"
+                        name="price"
+                        value={selectedProduct.price}
+                        onChange={handleOnChangeUpdateInputField}
+                        className="w-full px-3 py-1.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-rose/20 focus:border-rose transition-colors"
+                      />
+                    </div>
 
-                  <label className="block text-sm font-medium mt-3">
-                    Price (₹)
-                  </label>
-                  <input
-                    type="number"
-                    name="price"
-                    value={selectedProduct.price}
-                    onChange={handleOnChangeUpdateInputField}
-                    className="w-full p-2 border rounded mt-1"
-                  />
+                    <div className="col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Description
+                      </label>
+                      <textarea
+                        name="description"
+                        value={selectedProduct.description}
+                        onChange={handleOnChangeUpdateInputField}
+                        rows="3"
+                        className="w-full px-3 py-1.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-rose/20 focus:border-rose transition-colors"
+                      />
+                    </div>
 
-                  <label className="block text-sm font-medium mt-3">
-                    Category
-                  </label>
-                  <select
-                    name="category"
-                    value={selectedProduct.category}
-                    onChange={handleOnChangeUpdateInputField}
-                    className="w-full p-2 border rounded mt-1"
-                  >
-                    {category.map((cat) => {
-                      return (
-                        <option value={cat.type} key={cat.id}>
-                          {cat.type}
-                        </option>
-                      );
-                    })}
-                  </select>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Category
+                      </label>
+                      <select
+                        name="category"
+                        value={selectedProduct.category}
+                        onChange={handleOnChangeUpdateInputField}
+                        className="w-full px-3 py-1.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-rose/20 focus:border-rose transition-colors"
+                      >
+                        {category.map((cat) => (
+                          <option value={cat.type} key={cat.id}>
+                            {cat.type}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
 
-                  <label className="block text-sm font-medium mt-3">
-                    Location
-                  </label>
-                  <input
-                    type="text"
-                    name="location"
-                    value={selectedProduct.location}
-                    onChange={handleOnChangeUpdateInputField}
-                    className="w-full p-2 border rounded mt-1"
-                  />
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Location
+                      </label>
+                      <input
+                        type="text"
+                        name="location"
+                        value={selectedProduct.location}
+                        onChange={handleOnChangeUpdateInputField}
+                        className="w-full px-3 py-1.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-rose/20 focus:border-rose transition-colors"
+                      />
+                    </div>
 
-                  <label className="block text-sm font-medium mt-3">
-                    Picture
-                  </label>
-                  <img
-                    src={
-                      updatedPicture
-                        ? URL.createObjectURL(updatedPicture)
-                        : selectedProduct.picture
-                    }
-                    alt=""
-                    className="p-3 h-48 w-full object-contain"
-                  />
-                  <input
-                    name="picture"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleOnChangeUpdateInputField}
-                    className="w-full p-2 border rounded mt-1"
-                  />
+                    <div className="col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Picture
+                      </label>
+                      <div className="border border-dashed border-gray-200 rounded-lg p-3 text-center">
+                        <img
+                          src={
+                            updatedPicture
+                              ? URL.createObjectURL(updatedPicture)
+                              : selectedProduct.picture
+                          }
+                          alt=""
+                          className="h-32 w-full object-contain mb-2"
+                        />
+                        <input
+                          name="picture"
+                          type="file"
+                          accept="image/*"
+                          onChange={handleOnChangeUpdateInputField}
+                          className="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-medium file:bg-rose/10 file:text-rose hover:file:bg-rose/20"
+                        />
+                      </div>
+                    </div>
+                  </div>
 
-                  <button
-                    type="submit"
-                    className="w-full bg-green text-white font-medium text-md p-2 mt-4 rounded hover:bg-blue-600"
-                    onClick={handleSaveProductBtn}
-                  >
-                    Save Product
-                  </button>
+                  <div className="mt-6 flex justify-end">
+                    <button
+                      type="submit"
+                      className="px-4 py-1.5 bg-rose text-white font-medium rounded-lg hover:bg-rose/90 transition-colors"
+                      onClick={handleSaveProductBtn}
+                    >
+                      Save Changes
+                    </button>
+                  </div>
                 </div>
               </>
             ) : (
               <>
-                <Card item={selectedProduct} />
-                <div className="flex items-center justify-between">
-                  <p className="font-semibold mt-1">{selectedProduct.name}</p>
-                  <p className="font-bold">{selectedProduct.category}</p>
+                <div className="bg-gray-50 rounded p-3">
+                  <div className="h-48 w-full mb-3">
+                    <Card item={selectedProduct} height="h-48" />
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <h2 className="text-lg font-semibold text-gray-800">
+                        {selectedProduct.name}
+                      </h2>
+                      <span className="px-2 py-0.5 bg-rose/10 text-rose rounded-full text-sm">
+                        {selectedProduct.category}
+                      </span>
+                    </div>
+
+                    <div className="flex items-start text-gray-600">
+                      <MapPin size={16} strokeWidth={2} className="mt-1" />
+                      <p className="pl-2 text-sm">{selectedProduct.location}</p>
+                    </div>
+
+                    <div className="bg-white p-2 rounded text-sm">
+                      <span className="font-semibold">Description</span> -{" "}
+                      <span className="text-gray-600">
+                        {selectedProduct.description}
+                      </span>
+                    </div>
+
+                    <button
+                      className="w-full bg-grey_dark text-white py-1.5 text-sm font-medium rounded hover:bg-gray-700 transition-colors"
+                      onClick={openUpdateProduct}
+                    >
+                      Update Product
+                    </button>
+                  </div>
                 </div>
-                <div className="flex items-start mt-3 text-green">
-                  <MapPin size={18} strokeWidth={2} className="mt-1" />
-                  <p className="pl-2">{selectedProduct.location}</p>
-                </div>
-                <div className="mt-5">
-                  <span className="font-bold">Description</span> -{" "}
-                  {selectedProduct.description}
-                </div>
-                <button
-                  className="w-full bg-grey pt-2 pb-2 text-sm font-medium rounded-sm mt-3"
-                  onClick={openUpdateProduct}
-                >
-                  Update Product
-                </button>
               </>
             )}
           </div>

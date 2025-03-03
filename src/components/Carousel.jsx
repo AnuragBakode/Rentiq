@@ -10,33 +10,46 @@ const Carousel = ({ title, items }) => {
     navigate(`/products?category=${category}`);
   };
   return (
-    <section className="mb-8 pl-10 pr-10">
-      <h2 className="text-3xl font-bold text-orange mb-6">{title}</h2>
+    <section className="mb-8 mt-16 pr-10">
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-4xl font-bold bg-gradient-to-r from-orange to-rose bg-clip-text text-transparent">{title}</h2>
+        <button className="flex items-center text-sm font-medium text-gray-600 hover:text-orange transition-colors">
+          View All <ChevronRight className="w-4 h-4 ml-1" />
+        </button>
+      </div>
       <Swiper
         spaceBetween={30}
         slidesPerView={1}
         breakpoints={{
           640: { slidesPerView: 2 },
           768: { slidesPerView: 3 },
-          1024: { slidesPerView: 5 },
-          1200: { slidesPerView: 6 },
+          1024: { slidesPerView: 4 },
+          1200: { slidesPerView: 5 },
         }}
       >
         {items.map((item, index) => (
           <SwiperSlide
             key={index}
             onClick={() => handleCardClick(item.type)}
-            className="cursor-pointer"
+            className="cursor-pointer transform transition-transform duration-300 hover:scale-[1.02]"
           >
             <div
-              className="relative shadow-lg w-full rounded-xl h-72 bg-cover bg-center flex flex-col justify-between overflow-hidden"
+              className="relative shadow-xl w-full rounded-2xl h-80 bg-cover bg-center flex flex-col justify-between overflow-hidden group"
               style={{
                 backgroundImage: `url(${item.image})`,
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
-              <div className="absolute bottom-2 left-2 text-lg font-medium text-white">
-                {item.type}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-70 group-hover:opacity-80 transition-opacity duration-300"></div>
+              
+              <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-xl font-bold text-white mb-2">{item.type}</h3>
+                <p className="text-sm text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  Explore our collection of {item.type.toLowerCase()}
+                </p>
+              </div>
+              
+              <div className="absolute top-4 right-4 bg-white/10 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <ChevronRight className="w-5 h-5 text-white" />
               </div>
             </div>
           </SwiperSlide>

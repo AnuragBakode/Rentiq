@@ -9,7 +9,10 @@ export default {
       black: "#2a2a2a",
       white: "#ffffff",
       Ivory: "#FFFFF0",
-      grey: "#e5e5e5",
+      grey: "#ECECEC",
+      grey_light: "#FAFAFA",
+      grey_medium: "#F5F5F5",
+      grey_dark: "#333333",
     },
     extend: {
       animation: {

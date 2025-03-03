@@ -10,13 +10,11 @@ const Dashboard = () => {
 
   const productCategory = useSelector((state) => state.productCategory);
 
-  useEffect(() => {
-    console.log("Dashboard Mounted");
-  }, []);
-
   return (
-    <div className="min-h-screen flex flex-col m-auto max-w-7xl mt-5">
-      <NavBar />
+    <div className="flex flex-col m-auto w-11/12">
+      <div className="mt-6">
+        <NavBar />
+      </div>
       <Header />
       <Carousel title="Featured Categories" items={productCategory} />
     </div>

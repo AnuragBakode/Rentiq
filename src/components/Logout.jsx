@@ -23,7 +23,7 @@ const Logout = () => {
     <>
       {loading && <Loader />}
       <button
-        className="text-rose font-semibold font-Poppins text-sm"
+        className="w-full bg-rose/10 text-rose rounded-lg py-2 text-sm font-medium hover:bg-rose/20 transition-colors duration-300"
         onClick={logout}
       >
         Logout

@@ -56,13 +56,12 @@ const Products = () => {
     return <Loader />;
   } else {
     return (
-      <div className="w-screen max-w-7xl m-auto mt-10">
-        <NavBar />
-        <div className="flex justify-between items-baseline">
+      <div className=" w-11/12 m-auto">
+        <div className="mt-5">
+          <NavBar />
+        </div>
+        <div className="mt-10 m-auto">
           <SearchBox />
-          <Link to="/dashboard" className="text-rose">
-            Dashboard
-          </Link>
         </div>
         <h1 className="text-2xl font-bold mt-5">Search Results</h1>
         {error && <h1>{error}</h1>}
@@ -75,7 +74,7 @@ const Products = () => {
             </div>
             <div className="flex justify-center items-center">
               <button
-                className={`border px-4 py-1 rounded-md flex justify-center items-center font-bold m-4 ${
+                className={` px-4 py-1 rounded-md flex justify-center items-center font-bold m-4 ${
                   pageNoRef.current == 1 ? "opacity-50 cursor-not-allowed " : ""
                 }`}
                 disabled={pageNoRef.current == 1 ? true : false}
@@ -85,7 +84,7 @@ const Products = () => {
                 Prev
               </button>
               <button
-                className={`border px-4 py-1 rounded-md flex justify-center items-center font-bold ${
+                className={`px-4 py-1 rounded-md flex justify-center items-center font-bold ${
                   pageNoRef.current >= totalPages
                     ? "opacity-50 cursor-not-allowed "
                     : ""

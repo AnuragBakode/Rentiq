@@ -5,6 +5,7 @@ import ProductReducer from "./ProductsSlice.jsx";
 import ProductModalReducer from "./ProductModalSlice.jsx";
 import CartReducer from "./CartSlice.jsx";
 import UserProductReducer from "./UserProductsSlice.jsx";
+import UserOrdersReducer from "./UserOrdersSlice.jsx";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     productModal: ProductModalReducer,
     cart: CartReducer,
     userProducts: UserProductReducer,
+    userOrders: UserOrdersReducer,
   },
 });
 

@@ -3,11 +3,13 @@ import { User, ShoppingCart } from "lucide-react";
 import PostItem from "./PostItem";
 import { useDispatch, useSelector } from "react-redux";
 import { openCart } from "../redux/CartSlice";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleProfileClick = (e) => {
-    console.log(e);
+    navigate("/profile");
   };
   const handleCartBtnClick = () => {
     dispatch(openCart());
@@ -22,16 +24,16 @@ const NavBar = () => {
           <img
             alt="Rentiq"
             src="https://dpbexlknorwqhblxxmfl.supabase.co/storage/v1/object/sign/Assets/rentiq-high-resolution-logo-transparent.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJBc3NldHMvcmVudGlxLWhpZ2gtcmVzb2x1dGlvbi1sb2dvLXRyYW5zcGFyZW50LnBuZyIsImlhdCI6MTczNzQ2NTc0MSwiZXhwIjo0ODkxMDY1NzQxfQ.xuU4RhE0QuAtjicJoDLz01F9fkqJWKIndBuIEtb4Xgo&t=2025-01-21T13%3A22%3A22.166Z"
-            className="mx-auto h-10 w-auto"
+            className="mx-auto h-6 w-auto"
           />
         </div>
         <div className="flex items-center space-x-4">
           <PostItem />
           <button
-            className="flex items-center border px-4 py-2 rounded-lg text-green hover:bg-blue/90"
+            className="flex items-center border px-4 py-2 rounded-lg text-grey_dark text-xs font-semibold"
             onClick={handleProfileClick}
           >
-            <User className="w-5 h-5 mr-2" />
+            <User className="w-4 h-4 mr-1" />
             Profile
           </button>
           <div className="relative cursor-pointer" onClick={handleCartBtnClick}>
@@ -40,7 +42,7 @@ const NavBar = () => {
                 {productCount}
               </p>
             )}
-            <ShoppingCart className="text-green cursor-pointer" />
+            <ShoppingCart className="text-grey_dark cursor-pointer" />
           </div>
         </div>
       </nav>

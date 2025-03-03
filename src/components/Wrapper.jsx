@@ -19,9 +19,6 @@ function Wrapper({ children }) {
     dispatch(getCartItems());
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log("Wrapper Mounted");
-  }, [children]);
 
   if (isLoading) {
     return <Loader />;

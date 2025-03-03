@@ -122,7 +122,7 @@ const CartSlice = createSlice({
       newCartItems.forEach((item) => {
         total +=
           calculateTotalDays(item.startDate, item.endDate) *
-          +action.payload.product.price;
+          +item.product.price;
       });
 
       let productCount = newCartItems.length;
