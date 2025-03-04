@@ -33,9 +33,11 @@ const OrderRecieved = ({ setStartDate, setEndDate, setShowDateInputs }) => {
           );
         })
       ) : (
-        <p className="text-center text-gray-500">
-          You dont have any orders recieved
-        </p>
+        <div className="w-full h-48 bg-gray-50 rounded-lg">
+          <p className="text-xl font-medium text-grey_dark/50">
+            You dont have any orders recieved
+          </p>
+        </div>
       )}
     </div>
   );

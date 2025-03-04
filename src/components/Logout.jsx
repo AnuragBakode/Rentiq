@@ -4,6 +4,8 @@ import Loader from "./Loader";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { clearCart } from "../redux/CartSlice";
+import { updateSelectedProduct } from "../redux/UserProductsSlice";
+import { setSelectedOrder } from "../redux/UserOrdersSlice";
 
 const Logout = () => {
   const [loading, setLoading] = useState(false);
@@ -13,6 +15,8 @@ const Logout = () => {
     setLoading(true);
     const { error } = await supabase.auth.signOut();
     dispatch(clearCart());
+    dispatch(updateSelectedProduct(null));
+    dispatch(setSelectedOrder(null));
     if (error) {
       setLoading(false);
     }

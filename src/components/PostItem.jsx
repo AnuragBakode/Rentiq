@@ -88,8 +88,13 @@ const PostItem = () => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "";
+      document.body.style.overflow = "auto";
     }
+
+    // Cleanup function to restore scroll when component unmounts
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [isOpen]);
 
   return (
@@ -117,7 +122,7 @@ const PostItem = () => {
       {isLoading && <Loader />}
 
       {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="fixed inset-0 flex items-center justify-center z-40">
           <div
             className="fixed inset-0 bg-grey_dark/60 backdrop-blur-sm"
             onClick={() => {

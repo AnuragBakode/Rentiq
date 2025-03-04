@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Loader = () => {
+  useEffect(() => {
+    // Disable all interactions on mount
+    document.body.style.overflow = "hidden";
+    document.body.style.pointerEvents = "none";
+
+    // Re-enable interactions on unmount
+    return () => {
+      document.body.style.overflow = "unset";
+      document.body.style.pointerEvents = "auto";
+    };
+  }, []);
+
   return (
-    <div className="w-screen h-screen fixed top-0 left-0 bg-white bg-opacity-80 z-50 text-black">
+    <div className="w-screen h-screen fixed top-0 left-0 bg-white bg-opacity-80 z-50 text-black pointer-events-auto">
       <div className="flex justify-center items-center mt-80">
         <span className="text-3xl mr-4">Loading</span>
         <svg

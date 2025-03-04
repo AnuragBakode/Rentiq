@@ -18,27 +18,47 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="w-56 flex flex-col gap-2 m-2">
-      <div
-        className="cursor-pointer group relative flex flex-col bg-white shadow-[0_3px_10px_rgb(0,0,0,0.1)] rounded-lg overflow-hidden"
-        onClick={handleRentNowBtn}
-      >
-        <div className="absolute top-3 left-3 z-10">
-          <CircleUser className="w-6 h-6 text-white drop-shadow-lg" />
+    <div className="w-full p-2">
+      <div className="bg-white shadow-md overflow-hidden">
+        <div className="">
+          <div className="relative h-36 overflow-hidden">
+            <img
+              className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+              src={picture}
+              alt="product-image"
+            />
+          </div>
         </div>
-        <div className="absolute top-3 right-3 z-10">
-          <span className="text-xs font-medium text-white bg-rose/70 px-1.5 py-0.5 rounded backdrop-blur-sm">
-            ${product.price}/day
-          </span>
-        </div>
-        <div className="relative h-36 overflow-hidden">
-          <img
-            className="transition-transform duration-500 ease-[cubic-bezier(0.25, 1, 0.5, 1)] transform group-hover:scale-110 w-full h-full object-cover"
-            src={picture}
-            alt="product-image"
-          />
+
+        <div className="px-3 py-2">
+          <div className="flex items-center justify-between mb-2">
+            <span className="font-semibold text-base">
+              ${product.price}/day
+            </span>
+            <div className="w-6 h-6 rounded-full bg-gray-200 overflow-hidden">
+              <CircleUser className="w-full h-full text-gray-400" />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center text-gray-500 text-xs">
+              <MapPin className="w-3 h-3 mr-1" />
+              <span>{product.location || "Location N/A"}</span>
+            </div>
+            <div className="flex items-center">
+              <span className="text-sm text-yellow-500 animate-pulse">⭐</span>
+              <span className="text-sm ml-1">{product.rating || 5}</span>
+            </div>
+          </div>
         </div>
       </div>
+
+      <button
+        onClick={handleRentNowBtn}
+        className="w-full bg-grey_dark text-white text-sm font-bold py-1.5 transition-colors"
+      >
+        Rent Now
+      </button>
     </div>
   );
 };

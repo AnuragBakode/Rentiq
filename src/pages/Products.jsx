@@ -10,6 +10,7 @@ import { useSearchParams } from "react-router";
 import { Link } from "react-router";
 import ProductModal from "../components/ProductModal";
 import ProductInfo from "../components/ProductInfo";
+import Header from "../components/Header";
 
 const Products = () => {
   const pageNoRef = useRef(1);
@@ -61,15 +62,19 @@ const Products = () => {
           <NavBar />
         </div>
         <div className="mt-10 m-auto">
-          <SearchBox />
+          <Header showCards={false} />
         </div>
-        <h1 className="text-2xl font-bold mt-5">Search Results</h1>
+        <h1 className="text-2xl font-bold mt-5">Searched Results</h1>
         {error && <h1>{error}</h1>}
         {products.length ? (
           <>
-            <div className="mt-5 flex flex-wrap w-full">
+            <div className="mt-5 w-full flex flex-wrap">
               {products.map((product) => {
-                return <ProductCard key={product.id} product={product} />;
+                return (
+                  <div className="w-1/4">
+                    <ProductCard key={product.id} product={product} />
+                  </div>
+                );
               })}
             </div>
             <div className="flex justify-center items-center">

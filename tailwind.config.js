@@ -4,7 +4,8 @@ export default {
   theme: {
     colors: {
       rose: "#f1544e",
-      green: "#45827d",
+      green: "#00FF00",
+      red: "#FF0000",
       roselight: "#f9afac",
       black: "#2a2a2a",
       white: "#ffffff",

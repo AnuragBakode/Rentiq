@@ -57,6 +57,7 @@ export default function Cart() {
   };
 
   const handleCheckout = async () => {
+    setLoading(true);
     const { data, error } = await supabase.functions.invoke("placeOrders", {
       body: {
         items: cartItems,
@@ -71,15 +72,14 @@ export default function Cart() {
 
     if (error) {
       console.log(error);
-      
-      alert("Failed");
     }
 
     if (data) {
       dispatch(clearCart());
       dispatch(closeCart());
-      alert("Order Placed Successfully");
     }
+
+    setLoading(false);
   };
 
   useEffect(() => {

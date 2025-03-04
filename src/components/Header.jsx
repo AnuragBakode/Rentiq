@@ -3,7 +3,7 @@ import { Search } from "lucide-react";
 import SearchBox from "./SearchBox";
 import { useNavigate } from "react-router";
 
-const Header = () => {
+const Header = ({ showCards }) => {
   const navigate = useNavigate();
   return (
     <>
@@ -23,44 +23,46 @@ const Header = () => {
               <SearchBox />
             </div>
           </div>
-          <div className="mt-10 flex flex-row gap-4 cursor-pointer">
-            <div
-              className="relative flex-1 bg-[url('https://images.unsplash.com/photo-1550859492-d5da9d8e45f3')] bg-cover bg-center h-48 rounded-lg overflow-hidden"
-              onClick={() => navigate("/products")}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-black/90 to-black/70"></div>
-              <div className="relative z-10 p-6">
-                <h3 className="text-2xl font-bold mb-3 text-white">
-                  Browse Products
-                </h3>
-                <p className="text-white text-lg">
-                  Explore our wide range of products available for rent
-                </p>
+          {showCards && (
+            <div className="mt-10 flex flex-row gap-4 cursor-pointer">
+              <div
+                className="relative flex-1 bg-[url('https://images.unsplash.com/photo-1550859492-d5da9d8e45f3')] bg-cover bg-center h-48 rounded-lg overflow-hidden"
+                onClick={() => navigate("/products")}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-black/90 to-black/70"></div>
+                <div className="relative z-10 p-6">
+                  <h3 className="text-2xl font-bold mb-3 text-white">
+                    Browse Products
+                  </h3>
+                  <p className="text-white text-lg">
+                    Explore our wide range of products available for rent
+                  </p>
+                </div>
+              </div>
+              <div className="relative flex-1 bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe')] bg-cover bg-center h-48 rounded-lg overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-black/90 to-black/70"></div>
+                <div className="relative z-10 p-6">
+                  <h3 className="text-2xl font-bold mb-3 text-white">
+                    Trending Products
+                  </h3>
+                  <p className="text-white text-lg">
+                    Check out what's popular right now
+                  </p>
+                </div>
+              </div>
+              <div className="relative flex-1 bg-[url('https://images.unsplash.com/photo-1567095761054-7a02e69e5c43')] bg-cover bg-center h-48 rounded-lg overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-black/90 to-black/70"></div>
+                <div className="relative z-10 p-6">
+                  <h3 className="text-2xl font-bold mb-3 text-white">
+                    Products on Sale
+                  </h3>
+                  <p className="text-white text-lg">
+                    Great deals and discounts on rental items
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="relative flex-1 bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe')] bg-cover bg-center h-48 rounded-lg overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-black/90 to-black/70"></div>
-              <div className="relative z-10 p-6">
-                <h3 className="text-2xl font-bold mb-3 text-white">
-                  Trending Products
-                </h3>
-                <p className="text-white text-lg">
-                  Check out what's popular right now
-                </p>
-              </div>
-            </div>
-            <div className="relative flex-1 bg-[url('https://images.unsplash.com/photo-1567095761054-7a02e69e5c43')] bg-cover bg-center h-48 rounded-lg overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-black/90 to-black/70"></div>
-              <div className="relative z-10 p-6">
-                <h3 className="text-2xl font-bold mb-3 text-white">
-                  Products on Sale
-                </h3>
-                <p className="text-white text-lg">
-                  Great deals and discounts on rental items
-                </p>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       </main>
     </>

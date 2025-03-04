@@ -16,7 +16,6 @@ const ProfileProductSection = () => {
   const [updatedPicture, setUpdatedPicture] = useState("");
 
   const { session } = useSelector((state) => state.session);
-  const user = session.user;
 
   const dispatch = useDispatch();
 
@@ -38,6 +37,7 @@ const ProfileProductSection = () => {
 
   const handleOnChangeUpdateInputField = (e) => {
     const { name, value } = e.target;
+
     if (name == "picture") {
       const value = e.target.files[0];
       setUpdatedPicture(value);
@@ -83,18 +83,74 @@ const ProfileProductSection = () => {
               products.map((product) => {
                 return (
                   <div
-                    className="w-1/3 p-2"
+                    className="w-full p-2 mb-2"
                     key={product.id}
                     onClick={() => handleProductClick(product)}
                   >
-                    <Card item={product} page="Products" />
+                    <div className="flex bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-2">
+                      <div className="relative w-24 h-24 flex-shrink-0">
+                        <div className="w-full h-full rounded-lg overflow-hidden">
+                          <img
+                            src={product.picture}
+                            alt={product.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex-1 pl-4 flex flex-col justify-between relative">
+                        <div>
+                          <div className="absolute top-0 right-0">
+                            <span
+                              className={`px-2 py-0.5 text-xs font-medium rounded-full shadow-sm ${
+                                product.status === "Available"
+                                  ? "bg-green/10 text-green"
+                                  : "bg-red/20 text-red"
+                              }`}
+                            >
+                              {product.status}
+                            </span>
+                          </div>
+                          <h3 className="text-base font-semibold text-gray-800 mb-1 line-clamp-1 pr-20">
+                            {product.name}
+                          </h3>
+                          <div className="flex items-center text-gray-600 text-sm line-clamp-2">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-4 w-4 mr-1"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                              />
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                              />
+                            </svg>
+                            {product.location}
+                          </div>
+                        </div>
+                        <div className="text-rose-600 text-base font-bold">
+                          ${product.price}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 );
               })
             ) : (
-              <p className="text-center w-full text-gray-500 mt-4">
-                You haven't posted any products yet
-              </p>
+              <div className="w-full h-48 bg-gray-50 rounded-lg">
+                <p className="text-xl font-medium text-grey_dark/50">
+                  You haven't posted any products yet
+                </p>
+              </div>
             )}
           </div>
         </div>
@@ -103,7 +159,25 @@ const ProfileProductSection = () => {
           <div className="w-2/5 pl-5 mb-10">
             {updateProductModal ? (
               <>
-                <div className="bg-white">
+                <div className="bg-white relative">
+                  <button
+                    onClick={() => setUpdateProductModal(false)}
+                    className="absolute top-2 right-2 text-black hover:text-gray-700"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+
                   <h2 className="text-xl font-bold text-gray-800 mb-4">
                     Edit Product
                   </h2>
@@ -177,6 +251,58 @@ const ProfileProductSection = () => {
                         onChange={handleOnChangeUpdateInputField}
                         className="w-full px-3 py-1.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-rose/20 focus:border-rose transition-colors"
                       />
+                    </div>
+
+                    <div className="col-span-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Status
+                      </label>
+                      <div className="flex space-x-6">
+                        <label className="inline-flex items-center cursor-pointer group">
+                          <input
+                            type="radio"
+                            name="status"
+                            value="Available"
+                            checked={selectedProduct.status === "Available"}
+                            onChange={handleOnChangeUpdateInputField}
+                            className="hidden"
+                          />
+                          <div className="w-5 h-5 border-2 border-gray-300 rounded-full flex items-center justify-center group-hover:border-rose transition-colors">
+                            <div
+                              className={`w-3 h-3 rounded-full ${
+                                selectedProduct.status === "Available"
+                                  ? "bg-rose"
+                                  : "bg-transparent"
+                              }`}
+                            ></div>
+                          </div>
+                          <span className="ml-2 text-gray-700 group-hover:text-rose transition-colors">
+                            Available
+                          </span>
+                        </label>
+                        <label className="inline-flex items-center cursor-pointer group">
+                          <input
+                            type="radio"
+                            name="status"
+                            value="Blocked"
+                            checked={selectedProduct.status === "Blocked"}
+                            onChange={handleOnChangeUpdateInputField}
+                            className="hidden"
+                          />
+                          <div className="w-5 h-5 border-2 border-gray-300 rounded-full flex items-center justify-center group-hover:border-rose transition-colors">
+                            <div
+                              className={`w-3 h-3 rounded-full ${
+                                selectedProduct.status === "Blocked"
+                                  ? "bg-rose"
+                                  : "bg-transparent"
+                              }`}
+                            ></div>
+                          </div>
+                          <span className="ml-2 text-gray-700 group-hover:text-rose transition-colors">
+                            Blocked
+                          </span>
+                        </label>
+                      </div>
                     </div>
 
                     <div className="col-span-2">

@@ -15,7 +15,7 @@ const Dashboard = () => {
       <div className="mt-6">
         <NavBar />
       </div>
-      <Header />
+      <Header showCards={true} />
       <Carousel title="Featured Categories" items={productCategory} />
     </div>
   );

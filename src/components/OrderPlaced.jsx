@@ -36,7 +36,11 @@ const OrderPlaced = ({ setStartDate, setEndDate, setShowDateInputs }) => {
           );
         })
       ) : (
-        <p className="text-center">Your dont have any orders</p>
+        <div className="w-full h-48 bg-gray-50 rounded-lg">
+          <p className="text-xl font-medium text-grey_dark/50">
+            Your dont have any orders
+          </p>
+        </div>
       )}
     </div>
   );
