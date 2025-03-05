@@ -5,7 +5,11 @@ import UserDetails from "../components/UserDetails";
 import ProfileOrderDetails from "../components/ProfileOrderDetails";
 import ProfileProductSection from "../components/ProfileProductSection";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUserProducts } from "../redux/UserProductsSlice";
+import {
+  fetchUserProducts,
+  updateSelectedProduct,
+} from "../redux/UserProductsSlice";
+import { setSelectedOrder } from "../redux/UserOrdersSlice";
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState("products");
@@ -34,7 +38,11 @@ export default function ProfilePage() {
               className={`mr-10 text-sm font-medium flex items-center gap-2 relative after:absolute after:bottom-[-8px] after:left-0 after:h-0.5 after:bg-rose after:transition-all after:duration-300 ${
                 activeTab === "products" ? " after:w-full" : " after:w-0"
               }`}
-              onClick={() => setActiveTab("products")}
+              onClick={() => {
+                setActiveTab("products");
+                dispatch(setSelectedOrder(null));
+                dispatch(updateSelectedProduct(null));
+              }}
             >
               <Package size={18} /> Products
             </button>
@@ -42,7 +50,11 @@ export default function ProfilePage() {
               className={`text-sm font-medium flex items-center gap-2 relative after:absolute after:bottom-[-8px] after:left-0 after:h-0.5 after:bg-rose after:transition-all after:duration-300 ${
                 activeTab === "orders" ? "after:w-full" : " after:w-0"
               }`}
-              onClick={() => setActiveTab("orders")}
+              onClick={() => {
+                setActiveTab("orders");
+                dispatch(setSelectedOrder(null));
+                dispatch(updateSelectedProduct(null));
+              }}
             >
               <User size={18} /> Orders
             </button>

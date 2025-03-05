@@ -18,15 +18,47 @@ export const fetchOrders = createAsyncThunk("fetch/orders", async (userid) => {
     .select("*, Products(*)")
     .eq("user_id", userid);
 
+  // Fetch status for each order and add it to the order object
+  const placedordersWithStatus = await Promise.all(
+    ordersPlaced.map(async (order) => {
+      const { data: status } = await supabase
+        .from("Order_Status")
+        .select("status")
+        .eq("order_id", order.order_id)
+        .single();
+
+      return {
+        ...order,
+        status: status || null,
+      };
+    })
+  );
+
   // Fetch orders received (orders for user's products)
   const { data: ordersReceived } = await supabase
     .from("Orders")
     .select("*, Products(*)")
     .eq("owner_id", userid);
 
+  // Fetch status for each received order and add it to the order object
+  const receivedOrdersWithStatus = await Promise.all(
+    ordersReceived.map(async (order) => {
+      const { data: status } = await supabase
+        .from("Order_Status")
+        .select("status")
+        .eq("order_id", order.order_id)
+        .single();
+
+      return {
+        ...order,
+        status: status || null,
+      };
+    })
+  );
+
   return {
-    ordersPlaced: ordersPlaced || [],
-    ordersReceived: ordersReceived || [],
+    ordersPlaced: placedordersWithStatus || [],
+    ordersReceived: receivedOrdersWithStatus || [],
   };
 });
 

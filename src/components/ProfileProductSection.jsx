@@ -87,61 +87,15 @@ const ProfileProductSection = () => {
                     key={product.id}
                     onClick={() => handleProductClick(product)}
                   >
-                    <div className="flex bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-2">
-                      <div className="relative w-24 h-24 flex-shrink-0">
-                        <div className="w-full h-full rounded-lg overflow-hidden">
-                          <img
-                            src={product.picture}
-                            alt={product.name}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      </div>
-                      <div className="flex-1 pl-4 flex flex-col justify-between relative">
-                        <div>
-                          <div className="absolute top-0 right-0">
-                            <span
-                              className={`px-2 py-0.5 text-xs font-medium rounded-full shadow-sm ${
-                                product.status === "Available"
-                                  ? "bg-green/10 text-green"
-                                  : "bg-red/20 text-red"
-                              }`}
-                            >
-                              {product.status}
-                            </span>
-                          </div>
-                          <h3 className="text-base font-semibold text-gray-800 mb-1 line-clamp-1 pr-20">
-                            {product.name}
-                          </h3>
-                          <div className="flex items-center text-gray-600 text-sm line-clamp-2">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="h-4 w-4 mr-1"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                              />
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                              />
-                            </svg>
-                            {product.location}
-                          </div>
-                        </div>
-                        <div className="text-rose-600 text-base font-bold">
-                          ${product.price}
-                        </div>
-                      </div>
-                    </div>
+                    <Card 
+                      item={product}
+                      page="Products"
+                      className="shadow-sm hover:shadow-md"
+                      status={product.status}
+                      info={{
+                        location: product.location
+                      }}
+                    />
                   </div>
                 );
               })
@@ -345,7 +299,11 @@ const ProfileProductSection = () => {
               <>
                 <div className="bg-gray-50 rounded p-3">
                   <div className="h-48 w-full mb-3">
-                    <Card item={selectedProduct} height="h-48" />
+                    <img
+                      src={selectedProduct.picture}
+                      alt={selectedProduct.name}
+                      className="w-full h-full object-cover rounded"
+                    />
                   </div>
 
                   <div className="space-y-2">

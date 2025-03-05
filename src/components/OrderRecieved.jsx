@@ -5,15 +5,17 @@ import { setSelectedOrder } from "../redux/UserOrdersSlice";
 
 const OrderRecieved = ({ setStartDate, setEndDate, setShowDateInputs }) => {
   const { ordersRecieved } = useSelector((state) => state.userOrders);
+
   const dispatch = useDispatch();
   const selectedOrder = useSelector((state) => state.userOrders.selectedOrder);
+
   return (
     <div className="flex flex-wrap max-h-full overflow-y-scroll">
       {ordersRecieved && ordersRecieved.length > 0 ? (
         ordersRecieved.map((order) => {
           return (
             <div
-              className="w-1/3 p-2"
+              className="w-full p-2"
               onClick={() => {
                 setShowDateInputs(false);
                 dispatch(setSelectedOrder(order));
@@ -26,6 +28,7 @@ const OrderRecieved = ({ setStartDate, setEndDate, setShowDateInputs }) => {
                 info={{
                   start_date: order.start_date,
                   end_date: order.end_date,
+                  status: order.status.status,
                 }}
                 page="Orders"
               />
@@ -35,7 +38,7 @@ const OrderRecieved = ({ setStartDate, setEndDate, setShowDateInputs }) => {
       ) : (
         <div className="w-full h-48 bg-gray-50 rounded-lg">
           <p className="text-xl font-medium text-grey_dark/50">
-            You dont have any orders recieved
+            You haven't recieved any orders yet !
           </p>
         </div>
       )}

@@ -24,8 +24,6 @@ const ProfileOrderDetails = () => {
   }, []);
 
   const selectedOrder = useSelector((state) => state.userOrders.selectedOrder);
-
-  console.log(selectedOrder);
   
 
   const handleDeleteOrder = async () => {
@@ -55,6 +53,41 @@ const ProfileOrderDetails = () => {
     }
   };
 
+  const handleInProgress = async () => {
+    setLoading(true);
+    console.log("Button Clicked");
+
+    const { data, error } = await supabase.functions.invoke(
+      "updateOrderStatus",
+      {
+        body: {
+          order_id: selectedOrder.order_id,
+          status: "InProgress",
+        },
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(
+              localStorage.getItem("sb-dpbexlknorwqhblxxmfl-auth-token")
+            ).access_token
+          }`,
+        },
+      }
+    );
+
+    // If the status is successfully update, make the changes in the store as well
+    if(data){
+      
+    }
+
+    setLoading(false);
+  };
+
+  const handleCompleted = async () => {
+    setLoading(true);
+    console.log("Mark as Completed Btn Clicked");
+    setLoading(false);
+  };
+
   return (
     <>
       {loading && <Loader />}
@@ -68,6 +101,7 @@ const ProfileOrderDetails = () => {
               }`}
               onClick={() => {
                 setOrderRecieved(false);
+                setShowDateInputs(false);
                 dispatch(setSelectedOrder(null));
               }}
             >
@@ -79,6 +113,7 @@ const ProfileOrderDetails = () => {
               }`}
               onClick={() => {
                 setOrderRecieved(true);
+                setShowDateInputs(false);
                 dispatch(setSelectedOrder(null));
               }}
             >
@@ -104,8 +139,56 @@ const ProfileOrderDetails = () => {
 
         <div className="w-2/5 bg-gray-100 rounded-lg p-4 h-full ">
           {selectedOrder && (
-            <div className="space-y-3">
+            <div className="space-y-3 relative">
+              <button
+                onClick={() => {
+                  dispatch(setSelectedOrder(null));
+                  setShowDateInputs(false);
+                  setStartDate("");
+                  setEndDate("");
+                }}
+                className="absolute top-2 right-2 p-1.5 hover:bg-gray-100 rounded-full transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 text-gray-500"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+
               <h2 className="text-xl font-semibold mb-4 mt-6">Order Details</h2>
+
+              <div className="bg-white p-4 transition-shadow duration-300 flex justify-between items-center">
+                <h3 className="font-semibold text-grey_dark text-sm">
+                  Order Status:{" "}
+                  <span className="">{selectedOrder.status.status}</span>
+                </h3>
+                {orderRecieved
+                  ? selectedOrder.status.status === "Pending" && (
+                      <button
+                        className="text-white bg-blue px-2 py-1 rounded-md text-xs font-semibold"
+                        onClick={handleInProgress}
+                      >
+                        Mark as In Progress
+                      </button>
+                    )
+                  : selectedOrder.status.status === "InProgress" && (
+                      <button
+                        className="text-white bg-blue px-2 py-1 rounded-md text-xs font-semibold"
+                        onClick={handleCompleted}
+                      >
+                        Mark as Completed
+                      </button>
+                    )}
+              </div>
+
               <div className="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                 <h3 className="font-semibold text-gray-800 text-sm mb-3 border-b pb-2">
                   Product Details
