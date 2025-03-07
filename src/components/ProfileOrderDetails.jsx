@@ -7,13 +7,14 @@ import { Calendar } from "lucide-react";
 import { Trash2 } from "lucide-react";
 import supabase from '../supabase/auth.js'
 import Loader from './Loader'
+import { updateOrderListAfterStatusChange } from "../redux/UserOrdersSlice";
 
 const ProfileOrderDetails = () => {
   const [orderRecieved, setOrderRecieved] = useState(false);
   const [showDateInputs, setShowDateInputs] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [loading , setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { session } = useSelector((state) => state.session);
   const user = session.user;
@@ -24,7 +25,6 @@ const ProfileOrderDetails = () => {
   }, []);
 
   const selectedOrder = useSelector((state) => state.userOrders.selectedOrder);
-  
 
   const handleDeleteOrder = async () => {
     setLoading(true);
@@ -75,8 +75,20 @@ const ProfileOrderDetails = () => {
     );
 
     // If the status is successfully update, make the changes in the store as well
-    if(data){
-      
+    if (data) {
+      console.log("success");
+
+      let updatedOrder = {
+        ...selectedOrder,
+        status: { status: "InProgress" },
+      };
+      dispatch(setSelectedOrder(updatedOrder));
+      dispatch(
+        updateOrderListAfterStatusChange({
+          order_id: selectedOrder.order_id,
+          updatedOrder,
+        })
+      );
     }
 
     setLoading(false);
@@ -84,7 +96,40 @@ const ProfileOrderDetails = () => {
 
   const handleCompleted = async () => {
     setLoading(true);
-    console.log("Mark as Completed Btn Clicked");
+    console.log("Completed Btn Clicked");
+
+    const { data, error } = await supabase.functions.invoke(
+      "updateOrderStatus",
+      {
+        body: {
+          order_id: selectedOrder.order_id,
+          status: "Completed",
+        },
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(
+              localStorage.getItem("sb-dpbexlknorwqhblxxmfl-auth-token")
+            ).access_token
+          }`,
+        },
+      }
+    );
+
+    if (data) {
+      console.log("Status changed to Completed");
+      let updatedOrder = {
+        ...selectedOrder,
+        status: { status: "Completed" },
+      };
+      dispatch(setSelectedOrder(updatedOrder));
+      dispatch(
+        updateOrderListAfterStatusChange({
+          order_id: selectedOrder.order_id,
+          updatedOrder,
+        })
+      );
+    }
+
     setLoading(false);
   };
 
@@ -218,45 +263,46 @@ const ProfileOrderDetails = () => {
                   <h3 className="font-semibold text-gray-800 text-sm">
                     Rental Period
                   </h3>
-                  {!orderRecieved && !selectedOrder.completed && (
-                    <>
-                      {showDateInputs ? (
-                        <div className="flex gap-2">
+                  {!orderRecieved &&
+                    selectedOrder.status.status === "Pending" && (
+                      <>
+                        {showDateInputs ? (
+                          <div className="flex gap-6">
+                            <button
+                              className="text-red text-sm font-medium"
+                              onClick={() => {
+                                // Handle save dates here
+                                setShowDateInputs(false);
+                              }}
+                            >
+                              Save
+                            </button>
+                            <button
+                              className="text-red text-sm font-medium"
+                              onClick={() => {
+                                setShowDateInputs(false);
+                                setStartDate(selectedOrder.start_date);
+                                setEndDate(selectedOrder.end_date);
+                              }}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        ) : (
                           <button
-                            className="text-green-600 hover:text-green-700 text-sm font-medium"
+                            className="text-rose hover:text-blue-600 text-sm font-medium flex items-center gap-1"
                             onClick={() => {
-                              // Handle save dates here
-                              setShowDateInputs(false);
-                            }}
-                          >
-                            Save
-                          </button>
-                          <button
-                            className="text-gray-600 hover:text-gray-700 text-sm font-medium"
-                            onClick={() => {
-                              setShowDateInputs(false);
                               setStartDate(selectedOrder.start_date);
                               setEndDate(selectedOrder.end_date);
+                              setShowDateInputs(true);
                             }}
                           >
-                            Cancel
+                            <Calendar size={16} />
+                            Update Dates
                           </button>
-                        </div>
-                      ) : (
-                        <button
-                          className="text-rose hover:text-blue-600 text-sm font-medium flex items-center gap-1"
-                          onClick={() => {
-                            setStartDate(selectedOrder.start_date);
-                            setEndDate(selectedOrder.end_date);
-                            setShowDateInputs(true);
-                          }}
-                        >
-                          <Calendar size={16} />
-                          Update Dates
-                        </button>
-                      )}
-                    </>
-                  )}
+                        )}
+                      </>
+                    )}
                 </div>
                 <div className="space-y-2">
                   <div className="flex items-center text-gray-700">
@@ -315,7 +361,7 @@ const ProfileOrderDetails = () => {
                       </div>
                     </div>
                   </div>
-                  {!selectedOrder.completed && (
+                  {selectedOrder.status.status === "Pending" && (
                     <div className="flex space-x-3">
                       <button
                         className="flex-1 bg-rose/30 text-rose px-4 py-2 rounded-lg font-medium hover:bg-rose-500 transition-all duration-300 shadow-sm hover:shadow flex items-center justify-center gap-2"

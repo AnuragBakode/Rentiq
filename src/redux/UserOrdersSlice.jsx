@@ -70,6 +70,26 @@ const UserOrdersSlice = createSlice({
       console.log(action.payload);
       state.selectedOrder = action.payload;
     },
+
+    updateOrderListAfterStatusChange: (state, action) => {
+      console.log(action.payload);
+
+      state.ordersPlaced = state.ordersPlaced.map((order) => {
+        if (order.order_id == action.payload.order_id) {
+          return action.payload.updatedOrder;
+        }
+
+        return order;
+      });
+
+      state.ordersRecieved = state.ordersRecieved.map((order) => {
+        if (order.order_id == action.payload.order_id) {
+          return action.payload.updatedOrder;
+        }
+
+        return order;
+      });
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchOrders.pending, (state) => {
@@ -87,5 +107,6 @@ const UserOrdersSlice = createSlice({
   },
 });
 
-export const { setSelectedOrder } = UserOrdersSlice.actions;
+export const { setSelectedOrder, updateOrderListAfterStatusChange } =
+  UserOrdersSlice.actions;
 export default UserOrdersSlice.reducer;
