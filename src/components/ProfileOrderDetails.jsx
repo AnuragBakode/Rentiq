@@ -26,6 +26,8 @@ const ProfileOrderDetails = () => {
 
   const selectedOrder = useSelector((state) => state.userOrders.selectedOrder);
 
+  console.log(selectedOrder);
+
   const handleDeleteOrder = async () => {
     setLoading(true);
     console.log("Delete Btn Clicked");
@@ -120,6 +122,41 @@ const ProfileOrderDetails = () => {
       let updatedOrder = {
         ...selectedOrder,
         status: { status: "Completed" },
+      };
+      dispatch(setSelectedOrder(updatedOrder));
+      dispatch(
+        updateOrderListAfterStatusChange({
+          order_id: selectedOrder.order_id,
+          updatedOrder,
+        })
+      );
+    }
+
+    setLoading(false);
+  };
+
+  const handleUpdateDate = async () => {
+    setLoading(true);
+    const { data, error } = await supabase.functions.invoke("updateOrder", {
+      body: {
+        order_id: selectedOrder.order_id,
+        start_date: startDate,
+        end_date: endDate,
+      },
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("sb-dpbexlknorwqhblxxmfl-auth-token"))
+            .access_token
+        }`,
+      },
+    });
+
+    if (data) {
+      setShowDateInputs(false);
+      let updatedOrder = {
+        ...selectedOrder,
+        start_date: startDate,
+        end_date: endDate,
       };
       dispatch(setSelectedOrder(updatedOrder));
       dispatch(
@@ -271,8 +308,7 @@ const ProfileOrderDetails = () => {
                             <button
                               className="text-red text-sm font-medium"
                               onClick={() => {
-                                // Handle save dates here
-                                setShowDateInputs(false);
+                                handleUpdateDate();
                               }}
                             >
                               Save

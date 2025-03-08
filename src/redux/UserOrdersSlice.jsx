@@ -72,8 +72,6 @@ const UserOrdersSlice = createSlice({
     },
 
     updateOrderListAfterStatusChange: (state, action) => {
-      console.log(action.payload);
-
       state.ordersPlaced = state.ordersPlaced.map((order) => {
         if (order.order_id == action.payload.order_id) {
           return action.payload.updatedOrder;
