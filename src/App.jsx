@@ -8,6 +8,9 @@ import Dashboard from "./pages/Dashboard";
 import AuthWrapper from "./components/AuthWrapper";
 import Products from "./pages/Products";
 import Profile from "./pages/Profile";
+import UserLayout from "./components/UserLayout";
+import UserSearch from "./components/UserSearch";
+import UserDetails from "./components/UserDetails";
 
 function App() {
   return (
@@ -22,9 +25,10 @@ function App() {
           element={<Wrapper children={<Dashboard />} />}
         />
         <Route path="/profile" element={<Wrapper children={<Profile />} />} />
-        {/* <Route path="/products" element={<Products />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/user" element={<Profile />} /> */}
+        <Route path="/users" element={<Wrapper children={<UserLayout />} />}>
+          <Route index element={<UserSearch />} />
+          <Route path=":id" element={<UserDetails />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

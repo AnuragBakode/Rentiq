@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Package, User, DollarSign } from "lucide-react";
 import NavBar from "../components/NavBar";
-import UserDetails from "../components/UserDetails";
 import ProfileOrderDetails from "../components/ProfileOrderDetails";
 import ProfileProductSection from "../components/ProfileProductSection";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +9,7 @@ import {
   updateSelectedProduct,
 } from "../redux/UserProductsSlice";
 import { setSelectedOrder } from "../redux/UserOrdersSlice";
+import ProfileUserDetails from "../components/ProfileUserDetails";
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState("products");
@@ -29,7 +29,7 @@ export default function ProfilePage() {
       </div>
       <div className="w-full mx-auto mt-10 bg-white flex">
         <div className="w-1/6 bg-gray-100">
-          <UserDetails />
+          <ProfileUserDetails />
         </div>
 
         <div className="w-5/6">

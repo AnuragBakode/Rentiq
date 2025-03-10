@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import supabase from "../supabase/auth";
-import { useSelector } from "react-redux";
 
 const initialState = {
   pageSize: 10,

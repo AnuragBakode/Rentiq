@@ -12,7 +12,7 @@ const SearchBox = () => {
     if (product) {
       navigate(`/products?name=${product}`);
     } else {
-      navigate(`/user?name=${user}`);
+      navigate(`/users?name=${user}`);
     }
 
     setProduct("");
