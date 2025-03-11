@@ -1,19 +1,16 @@
 import React from "react";
 import { MapPin, CircleUser } from "lucide-react";
 import { openModal } from "../redux/ProductModalSlice";
-import { useDispatch, useSelector } from "react-redux";
-import Modal from "./ProductModal";
-import ProductInfo from "./ProductInfo";
-import ProductModal from "./ProductModal";
+import { useDispatch } from "react-redux";
 
 const ProductCard = ({ product }) => {
   const { picture } = product;
 
   const dispatch = useDispatch();
 
-  const { isOpen } = useSelector((state) => state.productModal);
-
   const handleRentNowBtn = () => {
+    console.log("Rent Now clicked");
+
     dispatch(openModal(product));
   };
 

@@ -5,10 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers, fetchUsersCount } from "../redux/UsersSlice";
 import Loader from "./Loader";
 import { Mail, MoveLeft, MoveRight, Phone, User } from "lucide-react";
+import { useNavigate } from "react-router";
 
 const UserSearch = () => {
   const pageNoRef = useRef(1);
   const [urlSearchParam] = useSearchParams();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("User Search Remounts");
+  }, []);
 
   let usersData = useSelector((state) => state.users);
   const { isLoading, error, pageSize, users, count } = usersData;
@@ -42,8 +49,10 @@ const UserSearch = () => {
     dispatch(fetchUsers({ name, from, to }));
   };
 
-  const handleUserCardClick = (userId) => {
-    console.log(userId, " Clicked");
+  const handleUserCardClick = (userId, user) => {
+    console.log(user);
+
+    navigate(`/users/${userId}`, { state: { user } });
   };
 
   return (
@@ -63,7 +72,8 @@ const UserSearch = () => {
                   key={user.id}
                   className="flex items-center p-2 border-grey_dark rounded-md shadow-sm relative bg-white transition duration-200 hover:shadow-md"
                   onClick={() => {
-                    handleUserCardClick(user.id);
+                    console.log(user);
+                    handleUserCardClick(user.id, user);
                   }}
                 >
                   <div className="w-20 h-20 flex items-center justify-center rounded-sm mr-4 overflow-hidden">

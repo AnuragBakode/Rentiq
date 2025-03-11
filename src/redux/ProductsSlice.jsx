@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import supabase from "../supabase/auth";
 
 const initialState = {
-  pageSize: 10,
+  pageSize: 3,
   products: [],
   isLoading: true,
   error: "",
@@ -45,7 +45,7 @@ const ProductSlice = createSlice({
   name: "products",
   initialState: initialState,
   extraReducers: (builder) => {
-    builder.addCase(fetchProductsCount.pending, (state) => {
+    builder.addCase(fetchProducts.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(fetchProducts.fulfilled, (state, action) => {

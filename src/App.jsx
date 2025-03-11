@@ -1,9 +1,8 @@
 import './App.css'
-import { BrowserRouter, Routes , Route } from 'react-router'
-import Home from './pages/Home'
-import Wrapper from './components/Wrapper'
-import Signin from './pages/Signin'
-import Signup from './pages/Signup'
+import { BrowserRouter, Routes, Route } from "react-router";
+import Wrapper from "./components/Wrapper";
+import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import AuthWrapper from "./components/AuthWrapper";
 import Products from "./pages/Products";
@@ -16,14 +15,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Wrapper children={<Dashboard />} />} />
         <Route path="/login" element={<AuthWrapper children={<Signin />} />} />
         <Route path="/signup" element={<AuthWrapper children={<Signup />} />} />
         <Route path="/products" element={<Wrapper children={<Products />} />} />
-        <Route
-          path="/dashboard"
-          element={<Wrapper children={<Dashboard />} />}
-        />
         <Route path="/profile" element={<Wrapper children={<Profile />} />} />
         <Route path="/users" element={<Wrapper children={<UserLayout />} />}>
           <Route index element={<UserSearch />} />

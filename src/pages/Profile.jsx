@@ -28,11 +28,11 @@ export default function ProfilePage() {
         <NavBar />
       </div>
       <div className="w-full mx-auto mt-10 bg-white flex">
-        <div className="w-1/6 bg-gray-100">
-          <ProfileUserDetails />
+        <div className="w-1/6">
+          <ProfileUserDetails user={user} showLogout={true} />
         </div>
 
-        <div className="w-5/6">
+        <div className="w-5/6 ml-10">
           <div className="flex mb-2">
             <button
               className={`mr-10 text-sm font-medium flex items-center gap-2 relative after:absolute after:bottom-[-8px] after:left-0 after:h-0.5 after:bg-rose after:transition-all after:duration-300 ${
