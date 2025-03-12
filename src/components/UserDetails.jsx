@@ -30,7 +30,8 @@ const UserDetails = () => {
       const { data } = await supabase
         .from("Products")
         .select()
-        .eq("user_id", id);
+        .eq("user_id", id)
+        .eq("status", "Available");
       setTotalProducts(data.length);
     };
 
@@ -53,7 +54,8 @@ const UserDetails = () => {
         .from("Products")
         .select()
         .range(from, to)
-        .eq("user_id", id);
+        .eq("user_id", id)
+        .eq("status", "Available");
       setProducts(data);
       setLoading(false);
     };

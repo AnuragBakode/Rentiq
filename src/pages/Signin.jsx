@@ -27,7 +27,7 @@ const Signin = () => {
       return;
     }
 
-    navigate("/dashboard");
+    navigate("/");
   }
   return (
     <>

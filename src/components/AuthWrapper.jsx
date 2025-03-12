@@ -20,7 +20,7 @@ const AuthWrapper = ({ children }) => {
     return <Loader />;
   } else {
     if (session) {
-      return <Navigate to="/dashboard" />;
+      return <Navigate to="/" />;
     } else {
       return children;
     }

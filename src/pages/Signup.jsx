@@ -32,7 +32,7 @@ const Signup = () => {
       return;
     }
 
-    navigate("/dashboard");
+    navigate("/");
   }
 
   return (
