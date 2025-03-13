@@ -76,32 +76,32 @@ const ProfileProductSection = () => {
     <>
       {isLoading && <Loader />}
       <h2 className="text-xl font-semibold mb-4 mt-6">Your Products</h2>
-      <div className="flex items-start">
-        <div className="flex flex-col w-3/5 pr-5">
-          <div className="w-full flex flex-wrap">
+      <div className="flex flex-col md:flex-row items-start">
+        <div className="w-full md:w-3/5">
+          <div className="w-full flex-col max-h-[50vh] overflow-y-scroll lg:max-h-[100vh]">
             {products.length > 0 ? (
               products.map((product) => {
                 return (
                   <div
-                    className="w-full p-2 mb-2"
+                    className="w-full  mb-2"
                     key={product.id}
                     onClick={() => handleProductClick(product)}
                   >
-                    <Card 
+                    <Card
                       item={product}
                       page="Products"
                       className="shadow-sm hover:shadow-md"
                       status={product.status}
                       info={{
-                        location: product.location
+                        location: product.location,
                       }}
                     />
                   </div>
                 );
               })
             ) : (
-              <div className="w-full h-48 bg-gray-50 rounded-lg">
-                <p className="text-xl font-medium text-grey_dark/50">
+              <div className="w-full h-48 bg-gray-50 rounded-lg flex items-center justify-center">
+                <p className="text-xl font-medium text-grey_dark/50 text-center">
                   You haven't posted any products yet
                 </p>
               </div>
@@ -110,7 +110,7 @@ const ProfileProductSection = () => {
         </div>
 
         {selectedProduct && (
-          <div className="w-2/5 pl-5 mb-10">
+          <div className="w-full md:w-2/5 md:pl-5 mb-10">
             {updateProductModal ? (
               <>
                 <div className="bg-white relative">

@@ -11,12 +11,12 @@ const OrderPlaced = ({ setStartDate, setEndDate, setShowDateInputs }) => {
   const selectedOrder = useSelector((state) => state.userOrders.selectedOrder);
 
   return (
-    <div className="flex flex-col overflow-x-auto">
+    <div className="flex flex-col overflow-x-auto max-h-[50vh] overflow-y-scroll lg:max-h-[100vh]">
       {ordersPlaced && ordersPlaced.length > 0 ? (
         ordersPlaced.map((order) => {
           return (
             <div
-              className="w-full p-2"
+              className="w-full lg:p-2"
               onClick={() => {
                 dispatch(setSelectedOrder(order));
                 setStartDate(selectedOrder.start_date);

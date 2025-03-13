@@ -173,12 +173,12 @@ const ProfileOrderDetails = () => {
   return (
     <>
       {loading && <Loader />}
-      <div className="flex h-full">
-        <div className="bg-gray-100 rounded-lg w-3/5">
+      <div className="flex items-start flex-col lg:flex-row">
+        <div className="rounded-lg w-full lg:w-3/5">
           <h2 className="text-xl font-semibold mb-4 mt-6">Your Orders</h2>
           <div className="flex mb-6">
             <button
-              className={`mr-10 text-sm font-medium relative after:absolute after:bottom-[-8px] after:left-0 after:h-0.5 after:bg-rose after:transition-all after:duration-300 ${
+              className={`mr-10 text-xs md:text-sm font-medium relative after:absolute after:bottom-[-8px] after:left-0 after:h-0.5 after:bg-rose after:transition-all after:duration-300 ${
                 !orderRecieved ? "after:w-full" : "after:w-0"
               }`}
               onClick={() => {
@@ -190,7 +190,7 @@ const ProfileOrderDetails = () => {
               Orders Placed
             </button>
             <button
-              className={`text-sm font-medium relative after:absolute after:bottom-[-8px] after:left-0 after:h-0.5 after:bg-rose after:transition-all after:duration-300 ${
+              className={`text-xs md:text-sm font-medium relative after:absolute after:bottom-[-8px] after:left-0 after:h-0.5 after:bg-rose after:transition-all after:duration-300 ${
                 orderRecieved ? "after:w-full" : "after:w-0"
               }`}
               onClick={() => {
@@ -202,7 +202,7 @@ const ProfileOrderDetails = () => {
               Orders Received
             </button>
           </div>
-          <div className="w-full">
+          <div className="">
             {orderRecieved ? (
               <OrderRecieved
                 setStartDate={setStartDate}
@@ -219,7 +219,7 @@ const ProfileOrderDetails = () => {
           </div>
         </div>
 
-        <div className="w-2/5 bg-gray-100 rounded-lg p-4 h-full ">
+        <div className="w-full lg:w-2/5 bg-gray-100 rounded-lg lg:p-4 ">
           {selectedOrder && (
             <div className="space-y-3 relative">
               <button
@@ -229,7 +229,7 @@ const ProfileOrderDetails = () => {
                   setStartDate("");
                   setEndDate("");
                 }}
-                className="absolute top-2 right-2 p-1.5 hover:bg-gray-100 rounded-full transition-colors"
+                className="absolute top-0 right-2 p-1.5 hover:bg-gray-100 rounded-full transition-colors"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -247,7 +247,7 @@ const ProfileOrderDetails = () => {
 
               <h2 className="text-xl font-semibold mb-4 mt-6">Order Details</h2>
 
-              <div className="bg-white p-4 transition-shadow duration-300 flex justify-between items-center">
+              <div className="bg-white p-2 transition-shadow duration-300 flex justify-between items-center">
                 <h3 className="font-semibold text-grey_dark text-sm">
                   Order Status:{" "}
                   <span className="">{selectedOrder.status.status}</span>
@@ -271,7 +271,7 @@ const ProfileOrderDetails = () => {
                     )}
               </div>
 
-              <div className="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
+              <div className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                 <h3 className="font-semibold text-gray-800 text-sm mb-3 border-b pb-2">
                   Product Details
                 </h3>

@@ -54,7 +54,7 @@ const Products = () => {
   } else {
     return (
       <div className=" w-11/12 m-auto">
-        <div className="mt-5">
+        <div className="sticky top-0 pt-6 z-10 bg-white">
           <NavBar />
         </div>
         <div className="mt-10 m-auto">
@@ -67,8 +67,8 @@ const Products = () => {
             <div className="mt-5 w-full flex flex-wrap">
               {products.map((product) => {
                 return (
-                  <div className="w-1/4">
-                    <ProductCard key={product.id} product={product} />
+                  <div className="w-1/2 md:w-1/3 lg:w-1/4" key={product.id}>
+                    <ProductCard product={product} />
                   </div>
                 );
               })}
@@ -99,7 +99,7 @@ const Products = () => {
             </div>
           </>
         ) : (
-          <h1 className="text-center text-4xl mt-20 font-bold">
+          <h1 className="text-center text-3xl sm:text-4xl mt-20 font-bold">
             No products found!
           </h1>
         )}

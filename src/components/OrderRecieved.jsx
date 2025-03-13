@@ -10,12 +10,12 @@ const OrderRecieved = ({ setStartDate, setEndDate, setShowDateInputs }) => {
   const selectedOrder = useSelector((state) => state.userOrders.selectedOrder);
 
   return (
-    <div className="flex flex-wrap max-h-full overflow-y-scroll">
+    <div className="flex flex-col h-[50vh] overflow-y-scroll lg:h-[100vh]">
       {ordersRecieved && ordersRecieved.length > 0 ? (
         ordersRecieved.map((order) => {
           return (
             <div
-              className="w-full p-2"
+              className="w-full"
               onClick={() => {
                 setShowDateInputs(false);
                 dispatch(setSelectedOrder(order));

@@ -131,7 +131,7 @@ const PostItem = () => {
             }}
           ></div>
 
-          <div className="relative bg-white rounded-xl shadow-2xl w-full max-w-4xl h-[80vh] flex flex-col">
+          <div className="relative ml-0 bg-white lg:rounded-xl lg:shadow-2xl w-full h-full lg:max-w-4xl lg:h-[80vh] flex flex-col">
             <div className="p-8 border-b border-grey sticky top-0 bg-white z-10 rounded-t-xl">
               <button
                 onClick={() => {
@@ -153,20 +153,20 @@ const PostItem = () => {
                 </svg>
               </button>
 
-              <div className="flex items-center gap-4">
+              <div className="flex gap-2 sm:gap-4">
                 <img
                   alt="Rentiq"
                   src="https://dpbexlknorwqhblxxmfl.supabase.co/storage/v1/object/sign/Assets/rentiq-high-resolution-logo-transparent.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJBc3NldHMvcmVudGlxLWhpZ2gtcmVzb2x1dGlvbi1sb2dvLXRyYW5zcGFyZW50LnBuZyIsImlhdCI6MTczNzQ2NTc0MSwiZXhwIjo0ODkxMDY1NzQxfQ.xuU4RhE0QuAtjicJoDLz01F9fkqJWKIndBuIEtb4Xgo&t=2025-01-21T13%3A22%3A22.166Z"
-                  className="h-8 w-auto"
+                  className="h-6 sm:h-8 w-auto object-contain"
                 />
                 <div className="h-6 w-px bg-grey"></div>
-                <h2 className="text-2xl font-bold text-grey_dark">
+                <h2 className="text-lg md:text-2xl font-bold text-grey_dark">
                   Post an Item
                 </h2>
               </div>
             </div>
 
-            <div className="p-8 overflow-y-auto flex-1">
+            <div className="p-6 sm:p-8 overflow-y-auto flex-1">
               {error && (
                 <div className="mb-6 p-4 bg-rose/10 rounded-lg border border-rose/20">
                   <p className="text-rose text-sm">{error}</p>
@@ -174,7 +174,7 @@ const PostItem = () => {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-6">
                     <div>
                       <label

@@ -202,13 +202,13 @@ export default function Cart() {
 
             <div className="flex gap-4">
               <button
-                className="flex-1 bg-grey_dark/85 text-white py-3 px-6 rounded-lg hover:bg-gray-200 transition font-medium"
+                className="flex-1 bg-grey_dark/85 text-xs sm:text-sm text-white py-3 px-4 sm:py-3 sm:px-6 rounded-lg hover:bg-gray-200 transition font-medium"
                 onClick={checkAvailability}
               >
                 Check Availability
               </button>
               <button
-                className="flex-1 bg-rose text-white py-3 px-6 rounded-lg hover:bg-rose/90 transition font-medium"
+                className="flex-1 bg-rose text-xs sm:text-sm text-white py-3 px-6 rounded-lg hover:bg-rose/90 transition font-medium"
                 onClick={handleCheckout}
               >
                 Checkout

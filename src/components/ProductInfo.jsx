@@ -33,15 +33,15 @@ const ProductInfo = () => {
   };
 
   return (
-    <div className="flex h-full">
-      <div className="flex flex-col basis-[50%] h-full overflow-hidden rounded-lg shadow-lg">
+    <div className="flex flex-col lg:flex-row h-full lg:overflow-hidden">
+      <div className="flex flex-col basis-[50%] h-full rounded-lg shadow-lg">
         <div
           style={{ backgroundImage: `url(${product.picture})` }}
-          className="h-full w-full bg-cover bg-center transition-transform duration-300 hover:scale-105"
+          className="h-full w-full bg-cover bg-center rounded-lg transition-transform duration-300 hover:scale-105 min-h-[250px]"
         ></div>
       </div>
-      <div className="ml-10 overflow-y-auto flex-[50%] scrollbar-hide pr-4">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
+      <div className="ml-0 lg:ml-10 lg:overflow-y-auto flex-1 lg:pr-4">
+        <h1 className="mt-2 lg:mt-0 text-2xl lg:text-3xl font-bold text-gray-800 mb-4">
           {product.name}
         </h1>
         <p className="text-sm leading-7 text-gray-600 tracking-wide font-light">
@@ -57,11 +57,11 @@ const ProductInfo = () => {
           <MapPin className="w-5 h-5 mr-2" />
           <p className="text-sm">{product.location}</p>
         </div>
-        <div className="mt-8 bg-gray-50 p-4 rounded-lg shadow-sm">
+        <div className=" mt-2 lg:mt-8 bg-gray-50 p-2 lg:p-4 rounded-lg shadow-sm">
           <h3 className="text-base font-semibold text-gray-800 mb-3">
             Select Rental Period
           </h3>
-          <div className="flex space-x-4">
+          <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
             <div className="flex-1 relative group">
               <label
                 htmlFor="start-date"
@@ -137,9 +137,9 @@ const ProductInfo = () => {
             {message}
           </p>
         )}
-        <div className="flex space-x-4 mt-8">
+        <div className="flex flex-row space-x-4 mt-8">
           <button
-            className="flex-1 bg-rose/30  py-3 px-6 rounded-lg text-rose font-bold shadow-sm hover:shadow-md transition-all duration-200"
+            className="flex-1 bg-rose/30 py-3 px-6 rounded-lg text-rose font-bold shadow-sm hover:shadow-md transition-all duration-200"
             onClick={handleAddToCart}
           >
             Add to Cart

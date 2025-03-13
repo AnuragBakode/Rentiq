@@ -60,23 +60,25 @@ const UserSearch = () => {
       {isLoading && <Loader />}
       <Header />
       <div className="">
-        <h1 className="text-2xl font-bold mt-10">Searched Results</h1>
+        <h1 className="text-xl lg:text-2xl font-bold mt-10">
+          Searched Results
+        </h1>
         {error && <p>Error fetching users: {error}</p>}
         {users.length === 0 ? (
-          <p className="text-red-500 mt-5">No searched user is present.</p>
+          <p className="text-red mt-5">No searched user is present.</p>
         ) : (
           <>
-            <div className="grid grid-cols-2 gap-2 mt-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-5">
               {users.map((user) => (
                 <div
                   key={user.id}
-                  className="flex items-center p-2 border-grey_dark rounded-md shadow-sm relative bg-white transition duration-200 hover:shadow-md"
+                  className="flex flex-row items-center p-2 border-grey_dark rounded-md shadow-sm relative bg-white transition duration-200 hover:shadow-md"
                   onClick={() => {
                     console.log(user);
                     handleUserCardClick(user.id, user);
                   }}
                 >
-                  <div className="w-20 h-20 flex items-center justify-center rounded-sm mr-4 overflow-hidden">
+                  <div className="w-10 h-10 sm:w-20 sm:h-20 flex items-center justify-center rounded-sm mr-4 overflow-hidden">
                     {user.profileImage ? (
                       <img
                         src={user.profileImage}
@@ -92,7 +94,7 @@ const UserSearch = () => {
                     )}
                   </div>
                   <div className="flex flex-col flex-grow">
-                    <h2 className="text-lg font-semibold text-gray-800">
+                    <h2 className="text-xs sm:text-sm md:text-lg font-semibold text-gray-800">
                       {user.user_metadata.name}
                     </h2>
                     <div className="flex items-center text-gray-600 mt-1">
@@ -101,7 +103,7 @@ const UserSearch = () => {
                         strokeWidth={2}
                         className="mr-2 text-blue-500"
                       />
-                      <p className="flex items-center font-medium">
+                      <p className="flex items-center text-xs sm:text-sm md:text-lg font-medium">
                         {user.email}
                       </p>
                     </div>
@@ -111,14 +113,14 @@ const UserSearch = () => {
                         strokeWidth={2}
                         className="mr-2 text-blue-500"
                       />
-                      <p className="flex items-center font-medium">
+                      <p className="flex items-center text-xs sm:text-sm md:text-base font-medium">
                         {user.user_metadata.phone
                           ? user.user_metadata.phone
                           : "N/A"}
                       </p>
                     </div>
                   </div>
-                  <p className="text-rose/80 absolute top-4 right-4 text-lg font-bold">
+                  <p className="text-rose/80 absolute top-4 right-4 text-xs sm:text-sm md:text-lg font-bold">
                     {user.user_metadata.rating ? user.user_metadata.rating : 5}{" "}
                     ★
                   </p>

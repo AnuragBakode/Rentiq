@@ -24,15 +24,15 @@ export default function ProfilePage() {
 
   return (
     <div className="w-11/12 m-auto">
-      <div className="mt-5">
+      <div className="sticky top-0 pt-6 z-10 bg-white">
         <NavBar />
       </div>
-      <div className="w-full mx-auto mt-10 bg-white flex">
-        <div className="w-1/6">
+      <div className="w-full mt-7 bg-white flex flex-col">
+        <div className="w-full">
           <ProfileUserDetails user={user} showLogout={true} />
         </div>
 
-        <div className="w-5/6 ml-10">
+        <div className="w-full mt-10">
           <div className="flex mb-2">
             <button
               className={`mr-10 text-sm font-medium flex items-center gap-2 relative after:absolute after:bottom-[-8px] after:left-0 after:h-0.5 after:bg-rose after:transition-all after:duration-300 ${

@@ -41,10 +41,10 @@ const ProductModal = ({ children }) => {
           }}
         ></div>
 
-        <div className="relative bg-white rounded-xl shadow-2xl p-8 w-full max-w-5xl h-[80vh] transform transition-all duration-300 scale-95 opacity-100">
+        <div className="relative bg-white md:rounded-xl shadow-2xl p-4 lg:p-8  w-full h-[100vh] lg:w-full lg:max-w-5xl lg:h-[80vh] transform transition-all duration-300 opacity-100">
           <button
             onClick={handlex}
-            className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
+            className="absolute top-2 right-4 lg:top-4 lg:right-4 p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
             aria-label="Close"
           >
             <svg
@@ -68,7 +68,7 @@ const ProductModal = ({ children }) => {
             />
           </div>
 
-          <div className="h-[calc(100%-4rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 pr-4">
+          <div className="h-[calc(100%-4rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 lg:pr-4">
             {children}
           </div>
         </div>

@@ -67,11 +67,11 @@ const UserDetails = () => {
     return <Loader />;
   } else {
     return (
-      <div className="flex w-full mx-auto mt-10">
-        <div className="w-1/6">
+      <div className="flex flex-col w-full mx-auto mt-10">
+        <div className="w-full ">
           <ProfileUserDetails user={user} />
         </div>
-        <div className="w-5/6 ml-10">
+        <div className="w-full mt-7">
           <div className="flex">
             <button
               className="mr-10 text-sm font-medium flex items-center gap-2 relative after:absolute after:bottom-[-8px] after:left-0 after:h-0.5 after:bg-rose after:transition-all after:duration-300 after:w-full"
@@ -86,10 +86,10 @@ const UserDetails = () => {
           </div>
           {products && Array.isArray(products) && products.length > 0 ? (
             <>
-              <div className="mt-5 w-full flex flex-wrap">
+              <div className="mt-7 w-full flex flex-wrap">
                 {products.map((product) => {
                   return (
-                    <div className="w-1/5" key={product.id}>
+                    <div className="w-1/2 md:w-1/3 lg:w-1/5" key={product.id}>
                       <ProductCard product={product} />
                     </div>
                   );

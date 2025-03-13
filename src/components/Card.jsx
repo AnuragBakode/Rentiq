@@ -4,7 +4,7 @@ const Card = ({ item, info, page, height }) => {
   return (
     <>
       <div className="flex shadow-sm rounded-lg h-24 overflow-hidden cursor-pointer hover:shadow-md transition-shadow duration-300 bg-white">
-        <div className="w-32 p-2">
+        <div className="w-24 md:w-32 p-2">
           <img
             src={item.picture}
             alt="Product"
@@ -12,7 +12,7 @@ const Card = ({ item, info, page, height }) => {
           />
         </div>
 
-        <div className="flex-1 p-3 relative">
+        <div className="flex-1 p-2 md:p-3 relative">
           {page === "Products" ? (
             <span
               className={`absolute top-2 right-2 ${
@@ -24,12 +24,18 @@ const Card = ({ item, info, page, height }) => {
               {item.status}
             </span>
           ) : (
-            <span className={`absolute top-2 right-2 ${info.status === "Pending" ? "bg-orange/20 text-orange" : "bg-green/10 text-green"} text-xs font-medium px-2 py-1 rounded`}>
+            <span
+              className={`absolute top-2 right-2 ${
+                info.status === "Pending"
+                  ? "bg-orange/20 text-orange"
+                  : "bg-green/10 text-green"
+              } text-xs font-medium px-2 py-1 rounded`}
+            >
               {info.status}
             </span>
           )}
 
-          <h3 className="font-medium text-sm text-grey_dark mb-1">
+          <h3 className="font-medium text-xs md:text-sm text-grey_dark mb-1">
             {item.name}
           </h3>
           <p className="text-xs font-medium text-rose mb-2">

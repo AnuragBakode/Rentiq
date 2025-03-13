@@ -12,7 +12,7 @@ const Dashboard = () => {
 
   return (
     <div className="flex flex-col m-auto w-11/12">
-      <div className="mt-6">
+      <div className="sticky top-0 pt-6 z-10 bg-white">
         <NavBar />
       </div>
       <Header showCards={true} />

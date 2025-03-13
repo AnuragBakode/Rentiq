@@ -7,7 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import AuthWrapper from "./components/AuthWrapper";
 import Products from "./pages/Products";
 import Profile from "./pages/Profile";
-import UserLayout from "./components/UserLayout";
+import UserLayout from "./pages/UserLayout";
 import UserSearch from "./components/UserSearch";
 import UserDetails from "./components/UserDetails";
 

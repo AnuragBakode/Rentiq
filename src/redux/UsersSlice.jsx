@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import supabase from "../supabase/auth";
 
 const initialState = {
-  pageSize: 1,
+  pageSize: 10,
   users: [],
   isLoading: true,
   error: "",
