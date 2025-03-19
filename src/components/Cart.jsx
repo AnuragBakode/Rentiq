@@ -4,6 +4,7 @@ import { clearCart, closeCart, removeFromCart } from "../redux/CartSlice";
 import { Trash2 } from "lucide-react";
 import supabase from "../supabase/auth";
 import Loader from "../components/Loader";
+import Razorpay from "razorpay";
 
 export default function Cart() {
   const [loading, setLoading] = useState(false);
@@ -51,6 +52,7 @@ export default function Cart() {
 
     setTimeout(() => {
       setAvailable("");
+      setError("");
     }, 3000);
 
     setLoading(false);
@@ -58,9 +60,11 @@ export default function Cart() {
 
   const handleCheckout = async () => {
     setLoading(true);
-    const { data, error } = await supabase.functions.invoke("placeOrders", {
+    console.log("Inside checkout");
+
+    let { data, error } = await supabase.functions.invoke("checkout", {
       body: {
-        items: cartItems,
+        cart: cartItems,
       },
       headers: {
         Authorization: `Bearer ${
@@ -70,14 +74,47 @@ export default function Cart() {
       },
     });
 
-    if (error) {
-      console.log(error);
-    }
+    data = JSON.parse(data);
 
-    if (data) {
-      dispatch(clearCart());
-      dispatch(closeCart());
+    if (error) {
+      setError(error.message);
+      setLoading(false);
+      return;
     }
+    if (!data) throw new Error("Order creation failed");
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = "https://api.razorpay.com/v1/checkout/embedded";
+
+    const fields = {
+      key_id: "rzp_test_wKKcRuYwdDZCby",
+      amount: data.amount,
+      currency: "INR",
+      order_id: data.id,
+      name: "Rentiq",
+      description: "Payment for Order",
+      prefill: {
+        name: "Anurag",
+        email: "anuragbakodeofficial.com",
+        contact: "9131471408",
+      },
+      redirect: true,
+      callback_url:
+        "https://dpbexlknorwqhblxxmfl.supabase.co/functions/v1/verify-payment",
+      cancel_url: "http://localhost:5173/payment-error",
+    };
+
+    Object.entries(fields).forEach(([key, value]) => {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = key;
+      input.value = typeof value === "object" ? JSON.stringify(value) : value;
+      form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
 
     setLoading(false);
   };

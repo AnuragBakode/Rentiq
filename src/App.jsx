@@ -10,6 +10,8 @@ import Profile from "./pages/Profile";
 import UserLayout from "./pages/UserLayout";
 import UserSearch from "./components/UserSearch";
 import UserDetails from "./components/UserDetails";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentError from "./pages/PaymentError";
 
 function App() {
   return (
@@ -18,12 +20,15 @@ function App() {
         <Route path="/" element={<Wrapper children={<Dashboard />} />} />
         <Route path="/login" element={<AuthWrapper children={<Signin />} />} />
         <Route path="/signup" element={<AuthWrapper children={<Signup />} />} />
+        {/* <Route path="/products" element={<Products />} /> */}
         <Route path="/products" element={<Wrapper children={<Products />} />} />
         <Route path="/profile" element={<Wrapper children={<Profile />} />} />
         <Route path="/users" element={<Wrapper children={<UserLayout />} />}>
           <Route index element={<UserSearch />} />
           <Route path=":id" element={<UserDetails />} />
         </Route>
+        <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="/payment-error" element={<PaymentError />} />
       </Routes>
     </BrowserRouter>
   );
