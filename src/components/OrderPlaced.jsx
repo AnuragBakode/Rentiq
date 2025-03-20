@@ -30,8 +30,9 @@ const OrderPlaced = ({ setStartDate, setEndDate, setShowDateInputs }) => {
                   start_date: order.start_date,
                   end_date: order.end_date,
                   status: order.status.status,
+                  owner: order.ownerDetails,
                 }}
-                page="Orders"
+                page="OrdersPlaced"
               />
             </div>
           );

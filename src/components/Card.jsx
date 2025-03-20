@@ -1,3 +1,4 @@
+import { User } from "lucide-react";
 import React from "react";
 
 const Card = ({ item, info, page, height }) => {
@@ -73,23 +74,21 @@ const Card = ({ item, info, page, height }) => {
                     <span className="block text-grey_dark">To</span>
                     <span className="font-medium">{info.end_date}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="p-1 bg-grey/10 rounded-full">
-                      <svg
-                        className="w-4 h-4 text-grey_dark"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                        <circle cx="12" cy="7" r="4" />
-                      </svg>
+                  {page == "OrdersPlaced" && (
+                    <div className="flex items-center gap-2">
+                      <div className="w-5 h-5 border rounded-full flex items-center justify-center">
+                        {info.owner.image ? (
+                          <img
+                            src={info.owner.image}
+                            className="w-full h-full rounded-full"
+                          />
+                        ) : (
+                          <User size={16} />
+                        )}
+                      </div>
+                      <span className="text-grey_dark">{info.owner.name}</span>
                     </div>
-                    <span className="text-grey_dark">Owner</span>
-                  </div>
+                  )}
                 </>
               )
             )}

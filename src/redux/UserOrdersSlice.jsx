@@ -27,9 +27,26 @@ export const fetchOrders = createAsyncThunk("fetch/orders", async (userid) => {
         .eq("order_id", order.order_id)
         .single();
 
+      let { data: userDetails, error } = await supabase.functions.invoke(
+        "getUserDetails",
+        {
+          body: { id: order.owner_id },
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(
+                localStorage.getItem("sb-dpbexlknorwqhblxxmfl-auth-token")
+              ).access_token
+            }`,
+          },
+        }
+      );
+
+      userDetails = JSON.parse(userDetails);
+
       return {
         ...order,
         status: status || null,
+        ownerDetails: userDetails,
       };
     })
   );
@@ -49,12 +66,31 @@ export const fetchOrders = createAsyncThunk("fetch/orders", async (userid) => {
         .eq("order_id", order.order_id)
         .single();
 
+      let { data: userDetails, error } = await supabase.functions.invoke(
+        "getUserDetails",
+        {
+          body: { id: order.user_id },
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(
+                localStorage.getItem("sb-dpbexlknorwqhblxxmfl-auth-token")
+              ).access_token
+            }`,
+          },
+        }
+      );
+
+      userDetails = JSON.parse(userDetails);
+
       return {
         ...order,
         status: status || null,
+        renterDetails: userDetails,
       };
     })
   );
+
+  console.log(placedordersWithStatus);
 
   return {
     ordersPlaced: placedordersWithStatus || [],

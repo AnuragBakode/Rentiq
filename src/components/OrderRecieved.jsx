@@ -10,7 +10,7 @@ const OrderRecieved = ({ setStartDate, setEndDate, setShowDateInputs }) => {
   const selectedOrder = useSelector((state) => state.userOrders.selectedOrder);
 
   return (
-    <div className="flex flex-col h-[50vh] overflow-y-scroll lg:h-[100vh]">
+    <div className="flex flex-col max-h-[50vh] overflow-y-scroll lg:h-[100vh]">
       {ordersRecieved && ordersRecieved.length > 0 ? (
         ordersRecieved.map((order) => {
           return (

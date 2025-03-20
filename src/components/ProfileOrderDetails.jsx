@@ -3,10 +3,10 @@ import OrderRecieved from "./OrderRecieved";
 import OrderPlaced from "./OrderPlaced";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchOrders, setSelectedOrder } from "../redux/UserOrdersSlice";
-import { Calendar } from "lucide-react";
+import { Calendar, Mail, Phone, User } from "lucide-react";
 import { Trash2 } from "lucide-react";
-import supabase from '../supabase/auth.js'
-import Loader from './Loader'
+import supabase from "../supabase/auth.js";
+import Loader from "./Loader";
 import { updateOrderListAfterStatusChange } from "../redux/UserOrdersSlice";
 
 const ProfileOrderDetails = () => {
@@ -379,21 +379,40 @@ const ProfileOrderDetails = () => {
               {!orderRecieved ? (
                 <>
                   <div className="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <h3 className="font-semibold text-gray-800 text-sm mb-3 border-b pb-2">
-                      Owner Details
+                    <h3 className="font-semibold text-gray-800 text-sm mb-4">
+                      Owner
                     </h3>
-                    <div className="space-y-2">
-                      <div className="flex items-center text-gray-700">
-                        <span className="font-medium w-16">Name:</span>
-                        <span>{selectedOrder.owner_name}</span>
+                    <div className="h-20 flex items-center space-x-4">
+                      <div className="border w-20 mr-4 flex items-center justify-center h-full rounded-full">
+                        {selectedOrder.ownerDetails.image ? (
+                          <img
+                            src={selectedOrder.ownerDetails.image}
+                            alt="Owner"
+                            className="rounded-full"
+                          />
+                        ) : (
+                          <User />
+                        )}
                       </div>
-                      <div className="flex items-center text-gray-700">
-                        <span className="font-medium w-16">Email:</span>
-                        <span>{selectedOrder.owner_email}</span>
-                      </div>
-                      <div className="flex items-center text-gray-700">
-                        <span className="font-medium w-16">Phone:</span>
-                        <span>{selectedOrder.owner_phone}</span>
+                      <div className="text-xs">
+                        <div className="flex items-center text-gray-700 mb-2">
+                          <User size={16} className="mr-2" />
+                          <span className="font-medium">
+                            {selectedOrder.ownerDetails.name}
+                          </span>
+                        </div>
+                        <div className="flex items-center text-gray-700 mb-2">
+                          <Mail size={16} className="mr-2" />
+                          <span>{selectedOrder.ownerDetails.email}</span>
+                        </div>
+                        <div className="flex items-center text-gray-700">
+                          <Phone size={16} className="mr-2" />
+                          <span>
+                            {selectedOrder.ownerDetails.phone
+                              ? selectedOrder.ownerDetails.phone
+                              : "N/A"}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -412,20 +431,39 @@ const ProfileOrderDetails = () => {
               ) : (
                 <div className="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
                   <h3 className="font-semibold text-gray-800 text-lg mb-3 border-b pb-2">
-                    Renter Details
+                    Renter
                   </h3>
-                  <div className="space-y-2">
-                    <div className="flex items-center text-gray-700">
-                      <span className="font-medium w-16">Name:</span>
-                      <span>{selectedOrder.user_name}</span>
+                  <div className="h-20 flex items-center space-x-4">
+                    <div className="border w-20 mr-4 flex items-center justify-center h-full rounded-full">
+                      {selectedOrder.renterDetails.image ? (
+                        <img
+                          src={selectedOrder.renterDetails.image}
+                          alt="Owner"
+                          className="rounded-full"
+                        />
+                      ) : (
+                        <User />
+                      )}
                     </div>
-                    <div className="flex items-center text-gray-700">
-                      <span className="font-medium w-16">Email:</span>
-                      <span>{selectedOrder.user_email}</span>
-                    </div>
-                    <div className="flex items-center text-gray-700">
-                      <span className="font-medium w-16">Phone:</span>
-                      <span>{selectedOrder.user_phone}</span>
+                    <div className="text-xs">
+                      <div className="flex items-center text-gray-700 mb-2">
+                        <User size={16} className="mr-2" />
+                        <span className="font-medium">
+                          {selectedOrder.renterDetails.name}
+                        </span>
+                      </div>
+                      <div className="flex items-center text-gray-700 mb-2">
+                        <Mail size={16} className="mr-2" />
+                        <span>{selectedOrder.renterDetails.email}</span>
+                      </div>
+                      <div className="flex items-center text-gray-700">
+                        <Phone size={16} className="mr-2" />
+                        <span>
+                          {selectedOrder.renterDetails.phone
+                            ? selectedOrder.renterDetails.phone
+                            : "N/A"}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
