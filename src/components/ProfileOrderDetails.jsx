@@ -423,7 +423,7 @@ const ProfileOrderDetails = () => {
                         onClick={handleDeleteOrder}
                       >
                         <Trash2 size={18} />
-                        Delete Order
+                        Cancel Order
                       </button>
                     </div>
                   )}

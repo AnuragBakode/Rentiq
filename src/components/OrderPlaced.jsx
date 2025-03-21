@@ -3,12 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { Calendar, User } from "lucide-react";
 import Card from "./Card";
 import { setSelectedOrder } from "../redux/UserOrdersSlice";
+import Loader from "./Loader";
 
 const OrderPlaced = ({ setStartDate, setEndDate, setShowDateInputs }) => {
-  const { ordersPlaced } = useSelector((state) => state.userOrders);
+  const { ordersPlaced, isLoading } = useSelector((state) => state.userOrders);
   const dispatch = useDispatch();
 
   const selectedOrder = useSelector((state) => state.userOrders.selectedOrder);
+
+  if (isLoading) return <Loader />;
 
   return (
     <div className="flex flex-col overflow-x-auto max-h-[50vh] overflow-y-scroll lg:max-h-[100vh]">

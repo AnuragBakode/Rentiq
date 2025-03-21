@@ -29,6 +29,8 @@ const Card = ({ item, info, page, height }) => {
               className={`absolute top-2 right-2 ${
                 info.status === "Pending"
                   ? "bg-orange/20 text-orange"
+                  : info.status === "Cancelled"
+                  ? "bg-red/10 text-red"
                   : "bg-green/10 text-green"
               } text-xs font-medium px-2 py-1 rounded`}
             >

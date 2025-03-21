@@ -2,13 +2,17 @@ import React from "react";
 import Card from "./Card";
 import { useSelector, useDispatch } from "react-redux";
 import { setSelectedOrder } from "../redux/UserOrdersSlice";
+import Loader from "./Loader";
 
 const OrderRecieved = ({ setStartDate, setEndDate, setShowDateInputs }) => {
-  const { ordersRecieved } = useSelector((state) => state.userOrders);
+  const { ordersRecieved, isLoading } = useSelector(
+    (state) => state.userOrders
+  );
 
   const dispatch = useDispatch();
   const selectedOrder = useSelector((state) => state.userOrders.selectedOrder);
 
+  if (isLoading) return <Loader />;
   return (
     <div className="flex flex-col max-h-[50vh] overflow-y-scroll lg:h-[100vh]">
       {ordersRecieved && ordersRecieved.length > 0 ? (
