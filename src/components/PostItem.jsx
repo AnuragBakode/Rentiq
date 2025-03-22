@@ -71,6 +71,10 @@ const PostItem = () => {
       picture: publicUrl.publicUrl,
     });
 
+    const { data: productNameInsertData, error: productNameInsertError } =
+      await supabase.from("Products_Name").insert({
+        name: formData.name,
+      });
     // IF we  get an error while saving the data to the  data base we might not want to save the data in the supabase storage as well
     if (error) {
       supabase.storage.from("Product Images").remove([fileName]);

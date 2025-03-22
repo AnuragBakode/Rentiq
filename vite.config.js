@@ -18,7 +18,7 @@ export default defineConfig({
     ], // Allow all hosts (use with caution)
     cors: true,
     hmr: {
-      clientPort: 443, // Required for ngrok
+      clientPort: 5173,
     },
   },
 });
