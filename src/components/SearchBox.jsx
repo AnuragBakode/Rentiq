@@ -8,6 +8,7 @@ const SearchBox = () => {
   const [user, setUser] = useState("");
   const [suggestion, setSuggestion] = useState("");
   const [error, setError] = useState("");
+  const [userSuggestion, setUserSuggestion] = useState("");
 
   let navigate = useNavigate();
 
@@ -35,7 +36,7 @@ const SearchBox = () => {
   }, []);
 
   const fetchSuggestions = async (...args) => {
-    if (!args[0]) {
+    if (!args[0] || !args[0].length) {
       setSuggestion("");
       return;
     }
@@ -59,8 +60,48 @@ const SearchBox = () => {
     }
   };
 
+  const fetchUserSuggestion = async (...args) => {
+    if (!args[0] || !args[0].length) {
+      setUserSuggestion("");
+      return;
+    }
+    let { data: users, error } = await supabase.functions.invoke(
+      "getAllUsersName",
+      {
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(
+              localStorage.getItem("sb-dpbexlknorwqhblxxmfl-auth-token")
+            ).access_token
+          }`,
+        },
+      }
+    );
+
+    if (error) {
+      setError(error);
+      return;
+    }
+    users = JSON.parse(users);
+    const result = users.filter((user) => {
+      if (user.toLowerCase().includes(args[0].toLowerCase())) {
+        return user;
+      }
+    });
+
+    if (result.length != 0) {
+      setUserSuggestion({ data: result });
+    } else {
+      setUserSuggestion({ message: "No users found with this name" });
+    }
+  };
+
   const debouncedFetchSuggestions = useMemo(() => {
     return debounce(fetchSuggestions, 300);
+  }, []);
+
+  const deboucedFetchUsersSuggestions = useMemo(() => {
+    return debounce(fetchUserSuggestion, 300);
   }, []);
 
   return (
@@ -82,7 +123,7 @@ const SearchBox = () => {
                 onBlur={() => {
                   setTimeout(() => {
                     setSuggestion(""); // Clear suggestion after a delay
-                  }, 100); // Adjust the delay as needed
+                  }, 300); // Adjust the delay as needed
                 }}
                 onFocus={(e) => debouncedFetchSuggestions(e.target.value)}
               />
@@ -99,7 +140,6 @@ const SearchBox = () => {
                         key={s.id}
                         onClick={() => {
                           setProduct((prev) => s.name);
-                          setSuggestion("");
                         }}
                       >
                         <p>{s.name}</p>
@@ -125,13 +165,42 @@ const SearchBox = () => {
                 onChange={(e) => {
                   setUser(e.target.value);
                   setProduct("");
+                  deboucedFetchUsersSuggestions(e.target.value);
                 }}
                 value={user}
+                onBlur={() => {
+                  setTimeout(() => {
+                    setUserSuggestion(""); // Clear suggestion after a delay
+                  }, 300); // Adjust the delay as needed
+                }}
+                onFocus={(e) => deboucedFetchUsersSuggestions(e.target.value)}
               />
               <span className="absolute bottom-0 left-0 w-full h-[1px] bg-grey_dark"></span>
               <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
                 <Search className="w-4 h-4" />
               </div>
+              {userSuggestion.data && (
+                <div className="max-h-40 overflow-x-scroll w-full bg-grey_dark text-white absolute left-0 top-150 z-50">
+                  {userSuggestion.data.map((name) => {
+                    return (
+                      <div
+                        className="p-2 border-b cursor-pointer text-xs sm:text-sm"
+                        key={name}
+                        onClick={() => {
+                          setUser((prev) => name);
+                        }}
+                      >
+                        <p>{name}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+              {userSuggestion.message && (
+                <div className="max-h-40 w-full bg-grey absolute left-0 top-110 z-50 flex justify-center items-center p-2 text-sm text-center">
+                  <p>{userSuggestion.message}</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
