@@ -43,10 +43,6 @@ const ProductCard = ({ product }) => {
                 {product.location || "Location N/A"}
               </span>
             </div>
-            <div className="flex items-center">
-              <span className="text-sm text-yellow-500 animate-pulse">⭐</span>
-              <span className="text-sm ml-1">{product.rating || 5}</span>
-            </div>
           </div>
         </div>
       </div>
