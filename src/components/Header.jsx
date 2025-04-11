@@ -2,16 +2,31 @@ import React from "react";
 import { Search } from "lucide-react";
 import SearchBox from "./SearchBox";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
 const Header = ({ showCards }) => {
   const navigate = useNavigate();
+  const session = useSelector((state) => state.session);
+
+  const hour = new Date().getHours();
+
+  let greetingMessage = "";
+
+  if (hour >= 5 && hour < 12) {
+    greetingMessage = "Good morning";
+  } else if (hour >= 12 && hour < 17) {
+    greetingMessage = "Good afternoon";
+  } else {
+    greetingMessage = "Good evening";
+  }
+
   return (
     <>
       <main className="mt-10">
         <div className="flex flex-col justify-between">
           <div className="mb-3">
             <h1 className="text-4xl md:text-6xl font-thin tracking-wider bg-gradient-to-r from-rose to-purple-600 bg-clip-text text-transparent animate-fade-in">
-              Good morning, Anurag
+              {greetingMessage}, {session.session.user.user_metadata.name}
             </h1>
           </div>
 
