@@ -120,10 +120,6 @@ const UserSearch = () => {
                       </p>
                     </div>
                   </div>
-                  <p className="text-rose/80 absolute top-4 right-4 text-xs sm:text-sm md:text-lg font-bold">
-                    {user.user_metadata.rating ? user.user_metadata.rating : 5}{" "}
-                    ★
-                  </p>
                 </div>
               ))}
             </div>
