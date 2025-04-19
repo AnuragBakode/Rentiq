@@ -8,6 +8,7 @@ import { Trash2 } from "lucide-react";
 import supabase from "../supabase/auth.js";
 import Loader from "./Loader";
 import { updateOrderListAfterStatusChange } from "../redux/UserOrdersSlice";
+import { Link } from "react-router";
 
 const ProfileOrderDetails = () => {
   const [orderRecieved, setOrderRecieved] = useState(false);
@@ -379,16 +380,24 @@ const ProfileOrderDetails = () => {
               {!orderRecieved ? (
                 <>
                   <div className="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <h3 className="font-semibold text-gray-800 text-sm mb-4">
-                      Owner
-                    </h3>
+                    <div className="flex items-center justify-between text-rose">
+                      <h3 className="font-semibold text-gray-800 text-sm mb-4">
+                        Owner
+                      </h3>
+                      <Link
+                        to={`/users/${selectedOrder.ownerDetails.sub}`}
+                        className="font-semibold text-gray-800 text-sm mb-4 text-rose cursor-pointer select-non"
+                      >
+                        View Profile
+                      </Link>
+                    </div>
                     <div className="h-20 flex items-center space-x-4">
                       <div className="border w-20 mr-4 flex items-center justify-center h-full rounded-full">
-                        {selectedOrder.ownerDetails.image ? (
+                        {selectedOrder.ownerDetails.avatar ? (
                           <img
-                            src={selectedOrder.ownerDetails.image}
+                            src={selectedOrder.ownerDetails.avatar}
                             alt="Owner"
-                            className="rounded-full"
+                            className="rounded-full w-full h-full object-cover"
                           />
                         ) : (
                           <User />
@@ -408,8 +417,8 @@ const ProfileOrderDetails = () => {
                         <div className="flex items-center text-gray-700">
                           <Phone size={16} className="mr-2" />
                           <span>
-                            {selectedOrder.ownerDetails.phone
-                              ? selectedOrder.ownerDetails.phone
+                            {selectedOrder.ownerDetails.contact
+                              ? selectedOrder.ownerDetails.contact
                               : "N/A"}
                           </span>
                         </div>
@@ -430,16 +439,24 @@ const ProfileOrderDetails = () => {
                 </>
               ) : (
                 <div className="bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
-                  <h3 className="font-semibold text-gray-800 text-lg mb-3 border-b pb-2">
-                    Renter
-                  </h3>
+                  <div className="flex items-center justify-between text-rose">
+                    <h3 className="font-semibold text-gray-800 text-sm mb-3 pb-2">
+                      Renter
+                    </h3>
+                    <Link
+                      to={`/users/${selectedOrder.renterDetails.sub}`}
+                      className="font-semibold text-gray-800 text-sm mb-3 pb-2"
+                    >
+                      View Profile
+                    </Link>
+                  </div>
                   <div className="h-20 flex items-center space-x-4">
                     <div className="border w-20 mr-4 flex items-center justify-center h-full rounded-full">
-                      {selectedOrder.renterDetails.image ? (
+                      {selectedOrder.renterDetails.avatar ? (
                         <img
-                          src={selectedOrder.renterDetails.image}
+                          src={selectedOrder.renterDetails.avatar}
                           alt="Owner"
-                          className="rounded-full"
+                          className="rounded-full w-full h-full"
                         />
                       ) : (
                         <User />
@@ -459,8 +476,8 @@ const ProfileOrderDetails = () => {
                       <div className="flex items-center text-gray-700">
                         <Phone size={16} className="mr-2" />
                         <span>
-                          {selectedOrder.renterDetails.phone
-                            ? selectedOrder.renterDetails.phone
+                          {selectedOrder.renterDetails.contact
+                            ? selectedOrder.renterDetails.contact
                             : "N/A"}
                         </span>
                       </div>

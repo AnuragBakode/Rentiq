@@ -9,8 +9,6 @@ const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
 
   const handleRentNowBtn = () => {
-    console.log("Rent Now clicked");
-
     dispatch(openModal(product));
   };
 
@@ -18,7 +16,7 @@ const ProductCard = ({ product }) => {
     <div className="w-full p-2">
       <div className="bg-white shadow-md overflow-hidden rounded-lg">
         <div
-          className="relative h-32 md:h-36 overflow-hidden cursor-pointer"
+          className="relative h-24 sm:h-32 md:h-36 overflow-hidden cursor-pointer"
           onClick={handleRentNowBtn}
         >
           <img
@@ -28,12 +26,10 @@ const ProductCard = ({ product }) => {
           />
         </div>
 
-        <div className="px-2 py-2">
+        <div className="px-2 py-2 flex flex-col sm:flex-row justify-between">
           <div className="flex items-center justify-between mb-1">
             <span className="font-semibold text-sm">${product.price}/day</span>
-            <div className="w-5 h-5 rounded-full bg-gray-200 overflow-hidden">
-              <CircleUser className="w-full h-full text-gray-400" />
-            </div>
+            <div className="w-5 h-5 rounded-full bg-gray-200 overflow-hidden"></div>
           </div>
 
           <div className="flex items-center justify-between mb-1">

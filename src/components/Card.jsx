@@ -2,6 +2,8 @@ import { User } from "lucide-react";
 import React from "react";
 
 const Card = ({ item, info, page, height }) => {
+  console.log(info.owner);
+
   return (
     <>
       <div className="flex shadow-sm rounded-lg h-24 overflow-hidden cursor-pointer hover:shadow-md transition-shadow duration-300 bg-white">
@@ -79,9 +81,9 @@ const Card = ({ item, info, page, height }) => {
                   {page == "OrdersPlaced" && (
                     <div className="flex items-center gap-2">
                       <div className="w-5 h-5 border rounded-full flex items-center justify-center">
-                        {info.owner.image ? (
+                        {info.owner.avatar ? (
                           <img
-                            src={info.owner.image}
+                            src={info.owner.avatar}
                             className="w-full h-full rounded-full"
                           />
                         ) : (

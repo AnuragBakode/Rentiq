@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router";
 import supabase from "../supabase/auth";
 import Loader from "./Loader";
@@ -14,14 +14,39 @@ const UserDetails = () => {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
   const [pageNo, setPageNo] = useState(1);
   const [pageSize] = useState(10);
   const [totalPages, setTotalPages] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
+  const [user, setUser] = useState({});
 
   const location = useLocation();
-  const { user } = location.state || {};
+  // const { user } = location.state || {};
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      let { data: userDetails, error } = await supabase.functions.invoke(
+        "getUserDetails",
+        {
+          body: { id: id },
+          headers: {
+            Authorization: `Bearer ${
+              JSON.parse(
+                localStorage.getItem("sb-dpbexlknorwqhblxxmfl-auth-token")
+              ).access_token
+            }`,
+          },
+        }
+      );
+
+      console.log(userDetails);
+      setUser(JSON.parse(userDetails));
+    };
+
+    fetchUserDetails();
+  }, []);
+
+  console.log(user);
 
   const { isOpen } = useSelector((state) => state.productModal);
 

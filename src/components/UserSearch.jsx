@@ -68,7 +68,7 @@ const UserSearch = () => {
           <p className="text-red mt-5">No searched user is present.</p>
         ) : (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mt-5 cursor-pointer">
               {users.map((user) => (
                 <div
                   key={user.id}
@@ -79,9 +79,9 @@ const UserSearch = () => {
                   }}
                 >
                   <div className="w-10 h-10 sm:w-20 sm:h-20 flex items-center justify-center rounded-sm mr-4 overflow-hidden">
-                    {user.profileImage ? (
+                    {user.user_metadata.avatar ? (
                       <img
-                        src={user.profileImage}
+                        src={user.user_metadata.avatar}
                         alt={`${user.name}'s profile`}
                         className="w-full h-full object-cover"
                       />
@@ -114,8 +114,8 @@ const UserSearch = () => {
                         className="mr-2 text-blue-500"
                       />
                       <p className="flex items-center text-xs sm:text-sm md:text-base font-medium">
-                        {user.user_metadata.phone
-                          ? user.user_metadata.phone
+                        {user.user_metadata.contact
+                          ? user.user_metadata.contact
                           : "N/A"}
                       </p>
                     </div>

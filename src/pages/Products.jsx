@@ -67,7 +67,7 @@ const Products = () => {
             <div className="mt-5 w-full flex flex-wrap">
               {products.map((product) => {
                 return (
-                  <div className="w-1/2 md:w-1/3 lg:w-1/4" key={product.id}>
+                  <div className="w-1/2 md:w-1/3 lg:w-1/5" key={product.id}>
                     <ProductCard product={product} />
                   </div>
                 );
