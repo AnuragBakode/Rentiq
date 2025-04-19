@@ -1,5 +1,6 @@
 import { User } from "lucide-react";
 import React from "react";
+import DaysDifference from "../../utils/DaysDifference";
 
 const Card = ({ item, info, page, height }) => {
   console.log(info.owner);
@@ -45,7 +46,9 @@ const Card = ({ item, info, page, height }) => {
           </h3>
           <p className="text-xs font-medium text-rose mb-2">
             <span className="font-normal">₹</span>
-            {item.price}
+            {page === "Products"
+              ? item.price
+              : DaysDifference(info.start_date, info.end_date) * item.price}
           </p>
 
           <div className="flex justify-between items-center text-xs">
