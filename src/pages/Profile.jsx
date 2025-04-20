@@ -22,6 +22,10 @@ export default function ProfilePage() {
     dispatch(fetchUserProducts({ userid: user.id }));
   }, []);
 
+
+  let userInfo = { ...user.user_metadata };
+  userInfo.email = user.email;
+
   return (
     <div className="w-11/12 m-auto">
       <div className="sticky top-0 pt-6 z-10 bg-white">
@@ -29,7 +33,7 @@ export default function ProfilePage() {
       </div>
       <div className="w-full mt-7 bg-white flex flex-col">
         <div className="w-full">
-          <ProfileUserDetails user={user} showLogout={true} />
+          <ProfileUserDetails user={userInfo} showLogout={true} />
         </div>
 
         <div className="w-full mt-10">

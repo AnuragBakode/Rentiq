@@ -27,7 +27,7 @@ const Logout = () => {
     <>
       {loading && <Loader />}
       <button
-        className="bg-rose/10 text-rose rounded-lg px-2 lg:px-3 py-2 text-sm font-medium hover:bg-rose/20 transition-colors duration-300"
+        className="bg-rose/10 text-rose rounded-lg px-2 lg:px-3 py-1 sm:py-2 text-xs sm:text-sm font-medium hover:bg-rose/20 transition-colors duration-300"
         onClick={logout}
       >
         Logout

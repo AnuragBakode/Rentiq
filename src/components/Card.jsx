@@ -3,8 +3,6 @@ import React from "react";
 import DaysDifference from "../../utils/DaysDifference";
 
 const Card = ({ item, info, page, height }) => {
-  console.log(info.owner);
-
   return (
     <>
       <div className="flex shadow-sm rounded-lg h-24 overflow-hidden cursor-pointer hover:shadow-md transition-shadow duration-300 bg-white">
