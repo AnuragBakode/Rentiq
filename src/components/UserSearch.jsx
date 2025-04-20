@@ -6,6 +6,7 @@ import { fetchUsers, fetchUsersCount } from "../redux/UsersSlice";
 import Loader from "./Loader";
 import { Mail, MoveLeft, MoveRight, Phone, User } from "lucide-react";
 import { useNavigate } from "react-router";
+import { UserRound } from "lucide-react";
 
 const UserSearch = () => {
   const pageNoRef = useRef(1);
@@ -86,11 +87,7 @@ const UserSearch = () => {
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <img
-                        src="https://images.unsplash.com/photo-1593344484962-796055d4a3a4?q=80&w=2030&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt="Default profile"
-                        className="w-full h-full object-cover"
-                      />
+                      <UserRound size={64} className="text-rose" />
                     )}
                   </div>
                   <div className="flex flex-col flex-grow">

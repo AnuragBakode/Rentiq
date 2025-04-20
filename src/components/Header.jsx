@@ -54,7 +54,10 @@ const Header = ({ showCards }) => {
                   </p>
                 </div>
               </div>
-              <div className="relative bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe')] bg-cover bg-center h-32 sm:h-48 rounded-lg overflow-hidden">
+              <div
+                className="relative bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe')] bg-cover bg-center h-32 sm:h-48 rounded-lg overflow-hidden"
+                onClick={() => navigate("/products")}
+              >
                 <div className="absolute inset-0 bg-gradient-to-r from-black/90 to-black/70"></div>
                 <div className="relative  p-4 sm:p-6">
                   <h3 className="text-sm sm:text-lg md:text-xl font-bold mb-2 sm:mb-3 text-white">
@@ -65,7 +68,10 @@ const Header = ({ showCards }) => {
                   </p>
                 </div>
               </div>
-              <div className="relative bg-[url('https://images.unsplash.com/photo-1567095761054-7a02e69e5c43')] bg-cover bg-center h-32 sm:h-48 rounded-lg overflow-hidden">
+              <div
+                className="relative bg-[url('https://images.unsplash.com/photo-1567095761054-7a02e69e5c43')] bg-cover bg-center h-32 sm:h-48 rounded-lg overflow-hidden"
+                onClick={() => navigate("/products")}
+              >
                 <div className="absolute inset-0 bg-gradient-to-r from-black/90 to-black/70"></div>
                 <div className="relative  p-4 sm:p-6">
                   <h3 className="text-sm sm:text-lg md:text-xl font-bold mb-2 sm:mb-3 text-white">
