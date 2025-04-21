@@ -12,6 +12,7 @@ import UserSearch from "./components/UserSearch";
 import UserDetails from "./components/UserDetails";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentError from "./pages/PaymentError";
+import Page404 from "./pages/404";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         </Route>
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payment-error" element={<PaymentError />} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </BrowserRouter>
   );
