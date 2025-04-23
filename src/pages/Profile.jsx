@@ -10,6 +10,8 @@ import {
 } from "../redux/UserProductsSlice";
 import { setSelectedOrder } from "../redux/UserOrdersSlice";
 import ProfileUserDetails from "../components/ProfileUserDetails";
+import { MoveRight } from "lucide-react";
+import { Link } from "react-router";
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState("products");
@@ -22,7 +24,6 @@ export default function ProfilePage() {
     dispatch(fetchUserProducts({ userid: user.id }));
   }, []);
 
-
   let userInfo = { ...user.user_metadata };
   userInfo.email = user.email;
 
@@ -32,36 +33,44 @@ export default function ProfilePage() {
         <NavBar />
       </div>
       <div className="w-full mt-7 bg-white flex flex-col">
-        <div className="w-full">
+        <div className="flex flex-col lg:flex-row w-full">
           <ProfileUserDetails user={userInfo} showLogout={true} />
         </div>
 
         <div className="w-full mt-10">
-          <div className="flex mb-2">
-            <button
-              className={`mr-10 text-sm font-medium flex items-center gap-2 relative after:absolute after:bottom-[-8px] after:left-0 after:h-0.5 after:bg-rose after:transition-all after:duration-300 ${
-                activeTab === "products" ? " after:w-full" : " after:w-0"
-              }`}
-              onClick={() => {
-                setActiveTab("products");
-                dispatch(setSelectedOrder(null));
-                dispatch(updateSelectedProduct(null));
-              }}
+          <div className="flex items-start justify-between">
+            <div className="flex mb-2">
+              <button
+                className={`mr-7 sm:mr-10 text-xs sm:text-sm font-medium flex items-center gap-2 relative after:absolute after:bottom-[-8px] after:left-0 after:h-0.5 after:bg-rose after:transition-all after:duration-300 ${
+                  activeTab === "products" ? " after:w-full" : " after:w-0"
+                }`}
+                onClick={() => {
+                  setActiveTab("products");
+                  dispatch(setSelectedOrder(null));
+                  dispatch(updateSelectedProduct(null));
+                }}
+              >
+                <Package size={16} /> Products
+              </button>
+              <button
+                className={`text-xs sm:text-sm font-medium flex items-center gap-2 relative after:absolute after:bottom-[-8px] after:left-0 after:h-0.5 after:bg-rose after:transition-all after:duration-300 ${
+                  activeTab === "orders" ? "after:w-full" : " after:w-0"
+                }`}
+                onClick={() => {
+                  setActiveTab("orders");
+                  dispatch(setSelectedOrder(null));
+                  dispatch(updateSelectedProduct(null));
+                }}
+              >
+                <User size={16} /> Orders
+              </button>
+            </div>
+            <Link
+              to="/products"
+              className="flex items-center font-medium text-xs sm:text-sm text-rose cursor-pointer"
             >
-              <Package size={18} /> Products
-            </button>
-            <button
-              className={`text-sm font-medium flex items-center gap-2 relative after:absolute after:bottom-[-8px] after:left-0 after:h-0.5 after:bg-rose after:transition-all after:duration-300 ${
-                activeTab === "orders" ? "after:w-full" : " after:w-0"
-              }`}
-              onClick={() => {
-                setActiveTab("orders");
-                dispatch(setSelectedOrder(null));
-                dispatch(updateSelectedProduct(null));
-              }}
-            >
-              <User size={18} /> Orders
-            </button>
+              Browse Products <MoveRight className="mt-1 ml-2" size={18} />
+            </Link>
           </div>
 
           <div>
